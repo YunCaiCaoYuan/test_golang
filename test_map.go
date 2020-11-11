@@ -1,5 +1,7 @@
 package main
 
+// hash 和 map
+
 import (
     "fmt"
 )
