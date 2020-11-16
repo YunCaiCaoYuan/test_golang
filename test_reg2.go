@@ -15,7 +15,14 @@ func main() {
     //matched, _ := regexp.MatchString(`[\w-]+@[\w]+(?:\.[\w]+)+`, sourceStr)
     //fmt.Printf("%v", matched) // true
 
-    sourceStr := "231213"
-    matched, _ := regexp.MatchString(`(0){5,}|(1){5,}|(1){5,}|(2){8,}`, sourceStr)
+    fmt.Println("同号：")
+    sourceStr := "99999"
+    matched, _ := regexp.MatchString(`(0){5,}|(1){5,}|(1){5,}|(2){8,}|(9){4,}`, sourceStr)
+    fmt.Printf("%v\n", matched) // true
+
+    fmt.Println("连号：")
+    sourceStr = "1234567"
+    matched, _ = regexp.MatchString(`(?:0(?=1)|1(?=2)|2(?=3)|3(?=4)|4(?=5)|5(?=6)|6(?=7)|7(?=8)|8(?=9)){5}\d`, sourceStr)
+
     fmt.Printf("%v", matched) // true
 }
