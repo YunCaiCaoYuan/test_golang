@@ -2,12 +2,12 @@ package main
 
 import (
 	"fmt"
-	"regexp"
-	"strconv"
+	//"regexp"
+	//"strconv"
 )
 
 func IsGoodNum(num int64) bool {
-	tNum := num
+	//tNum := num
 	var arr = make([]int64, 0)
 	for {
 		if num >= 10 {
@@ -87,17 +87,33 @@ func IsGoodNum(num int64) bool {
 		nums[1] == 5 && nums[2] == 2 && nums[3] == 1 && nums[4] == 1 && nums[5] == 3 && nums[6] == 1 && nums[7] == 4 {
 		return true
 	}
-	//特殊数字520重复，如520x520x，x520520x，x520x520
-	numStr := strconv.Itoa(int(tNum))
-	re := regexp.MustCompile(`(520[\d]?){2,}`)
-	if re.MatchString(numStr) {
+	//特殊数字520重复，如 520520xx, 520x520x, x520x520, x520520x, xx520520, 520xx520
+	if nums[0] == 5 && nums[1] == 2 && nums[2] == 0 && nums[3] == 5 && nums[4] == 2 && nums[5] == 0 ||
+		nums[0] == 5 && nums[1] == 2 && nums[2] == 0 && nums[4] == 5 && nums[5] == 2 && nums[6] == 0 ||
+		nums[1] == 5 && nums[2] == 2 && nums[3] == 0 && nums[5] == 5 && nums[6] == 2 && nums[7] == 0 ||
+		nums[1] == 5 && nums[2] == 2 && nums[3] == 0 && nums[4] == 5 && nums[5] == 2 && nums[6] == 0 ||
+		nums[2] == 5 && nums[3] == 2 && nums[4] == 0 && nums[5] == 5 && nums[6] == 2 && nums[7] == 0 ||
+		nums[0] == 5 && nums[1] == 2 && nums[2] == 0 && nums[5] == 5 && nums[6] == 2 && nums[7] == 0 {
 		return true
 	}
+	//numStr := strconv.Itoa(int(tNum))
+	//re := regexp.MustCompile(`(520[\d]?){2,}`)
+	//if re.MatchString(numStr) {
+	//	return true
+	//}
 	//特殊数字521重复，如521x521x，x521x521，xx521521
-	re = regexp.MustCompile(`(521[\d]?){2,}`)
-	if re.MatchString(numStr) {
+	if nums[0] == 5 && nums[1] == 2 && nums[2] == 1 && nums[3] == 5 && nums[4] == 2 && nums[5] == 1 ||
+		nums[0] == 5 && nums[1] == 2 && nums[2] == 1 && nums[4] == 5 && nums[5] == 2 && nums[6] == 1 ||
+		nums[1] == 5 && nums[2] == 2 && nums[3] == 1 && nums[5] == 5 && nums[6] == 2 && nums[7] == 1 ||
+		nums[1] == 5 && nums[2] == 2 && nums[3] == 1 && nums[4] == 5 && nums[5] == 2 && nums[6] == 1 ||
+		nums[2] == 5 && nums[3] == 2 && nums[4] == 1 && nums[5] == 5 && nums[6] == 2 && nums[7] == 1 ||
+		nums[0] == 5 && nums[1] == 2 && nums[2] == 1 && nums[5] == 5 && nums[6] == 2 && nums[7] == 1 {
 		return true
 	}
+	//re = regexp.MustCompile(`(521[\d]?){2,}`)
+	//if re.MatchString(numStr) {
+	//	return true
+	//}
 	return false
 }
 
@@ -125,8 +141,8 @@ func main() {
 		15471547, 96879687, 10001000,
 		52013149, 95201314,
 		52113149, 95211314,
-		95205201, 95201520, 52015202,
-		95211521, 11521521, 88521521}
+		52052099, 52045205, 85209520, 15205201, 34520520, 52034520,
+		52152199, 52145215, 85219521, 15215211, 34521521, 52134521}
 
 	for _, num := range numberList {
 		if IsGoodNum(num) {
