@@ -7,6 +7,8 @@ type test struct {
 	Price int
 }
 
+// 测试不用make给切片分配内存
+
 func main() {
 	var testList []*test
 	if testList == nil {
