@@ -1,9 +1,6 @@
 package main
 
-import (
-	"fmt"
-	"regexp"
-)
+import "reflect"
 
 type test struct {
 	Count int
@@ -15,6 +12,9 @@ func (u *test) TableName() string {
 }
 
 func main() {
+	const test = 4
+	println(reflect.TypeOf(test).Name())
+
 	// 测试不用make给切片分配内存，testList=nil
 	//var testList []*test
 	//fmt.Println("testList-len=", len(testList)) // len=0
@@ -52,9 +52,9 @@ func main() {
 	//fmt.Println("sql2 : ", sql2)
 
 	//Emoji
-	r := regexp.MustCompile("^[ a-zA-Z0-9\u4e00-\u9fa5\u1F300-\u1F5FF\u1F600-\u1F64F\u1F680-\u1F6FF\u2600-\u2B55]{1,4}$")
-	name := "ἰ0"
-	if r.MatchString(name) {
-		fmt.Println("ok!!!")
-	}
+	//r := regexp.MustCompile("^[ a-zA-Z0-9\u4e00-\u9fa5\u1F300-\u1F5FF\u1F600-\u1F64F\u1F680-\u1F6FF\u2600-\u2B55]{1,4}$")
+	//name := "ἰ0"
+	//if r.MatchString(name) {
+	//	fmt.Println("ok!!!")
+	//}
 }
