@@ -6,6 +6,7 @@ import (
 )
 
 func main() {
+
 	test := 1234
 	ret, _ := json.Marshal(test)
 	fmt.Println("ret=", ret)
