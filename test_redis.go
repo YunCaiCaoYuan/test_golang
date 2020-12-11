@@ -2,22 +2,50 @@ package main
 
 import (
 	"fmt"
-	"strconv"
+	//"git.2tianxin.com/platform/utils/uredis"
+	"github.com/go-redis/redis"
+	"strings"
 	"time"
-	//"github.com/go-redis/redis"
 )
 
 func main() {
-	//fmt.Println("time.Minute=", time.Minute)
+	host := "127.0.0.1:6379"
+	pwd := ""
+	db := 0
+	RedisCon := New(host, pwd, db)
 
-	//fmt.Println("20000376 % 8 =", 20000376 % 8)
+	key := "v1.0:AccountSkipId"
+	ids := []string{"1", "2"}
+	err := RedisCon.SAdd(key, ids).Err()
+	if err != nil {
+		fmt.Println("AddSkipIds redis failed ", err)
+	}
 
-	now := GetNowUnix()
-	fmt.Println("now=", now)
-	ret := strconv.FormatInt(GetNowUnix(), 10)
-	fmt.Println("ret=", ret)
-	now2 := time.Now().Unix()
-	fmt.Println("now2=", now2)
+	/*
+		fmt.Println("time.Minute=", time.Minute)
+		fmt.Println("20000376 % 8 =", 20000376 % 8)
+		now := GetNowUnix()
+		fmt.Println("now=", now)
+		ret := strconv.FormatInt(GetNowUnix(), 10)
+		fmt.Println("ret=", ret)
+		now2 := time.Now().Unix()
+		fmt.Println("now2=", now2)
+	*/
+}
+
+func New(host string, pwd string, db int) *redis.Client {
+	configs := strings.Split(host, ",")
+	con := redis.NewClient(&redis.Options{
+		PoolSize: 100,
+		Addr:     strings.TrimSpace(configs[0]),
+		Password: pwd,
+		DB:       db,
+	})
+	_, err := con.Ping().Result()
+	if err != nil {
+		panic("redis初始化失败, err:" + err.Error())
+	}
+	return con
 }
 
 //获取当前时间戳
