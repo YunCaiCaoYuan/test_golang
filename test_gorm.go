@@ -1,18 +1,38 @@
 package main
 
 import (
+	"fmt"
 	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )
 
-type Product struct {
-	gorm.Model
-	Code  string
-	Price uint
-}
-
 func main() {
+	dbDSN := "root:123456@tcp(139.159.144.149:3306)/test"
+	db, err := gorm.Open("mysql", dbDSN)
+	if err != nil {
+		fmt.Println("err=", err)
+	}
+
+	type TbUser struct {
+		Id       int32
+		Username string
+	}
+	tbUsers := make([]*TbUser, 0)
+	err = db.Raw("select * from tb_user").Scan(&tbUsers).Error
+	if err != nil {
+		fmt.Println("err", err)
+	}
+	for _, tbUser := range tbUsers {
+		fmt.Println("tbUser=", tbUser)
+	}
+
 	/*
+		type Product struct {
+			gorm.Model
+			Code  string
+			Price uint
+		}
 		db, err := gorm.Open("sqlite3", "test.db")
 		if err != nil {
 			panic("failed to connect database")
