@@ -70,10 +70,8 @@ func GetLevel(point int64) int64 {
 }
 
 func main() {
-    //var point int64
+	//var point int64
 
-    level := GetLevel(10)
-    fmt.Println("level=", level)
+	level := GetLevel(10)
+	fmt.Println("level=", level)
 }
-
-
