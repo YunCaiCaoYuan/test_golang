@@ -5,6 +5,7 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
+	"time"
 )
 
 func main() {
@@ -13,7 +14,37 @@ func main() {
 	if err != nil {
 		fmt.Println("err=", err)
 	}
+	type Player struct {
+		Id          int64      `gorm:"column:Id"`
+		Id2         int64      `gorm:"column:Id2"`
+		Nickname    string     `gorm:"column:Nickname"`
+		Sex         int8 	    `gorm:"column:Sex"`
+		Charm       int64      `gorm:"column:Charm"`
+		Wealth      int64      `gorm:"column:Wealth"`
+		Flags       int64      `gorm:"column:Flags"`
+		Icon        string     `gorm:"column:Icon"`
+		OnlineTime  int64      `gorm:"column:OnlineTime"`
+		OnlineExp   uint32     `gorm:"column:OnlineExp"`
+		ClanId      int32      `gorm:"column:ClanId"`
+		CreateAt    time.Time  `gorm:"column:CreateAt"`
+		IsDelete    bool       `gorm:"-"`
+		CharmLevel  int32      `gorm:"-"`
+		WealthLevel int32      `gorm:"-"`
+	}
+	players := make([]*Player, 0)
+	ids := []int32{1,2,6}
+	playerIds := make([]int64, 0)
+	err = db.Raw("select Id FROM player WHERE id in (?) ", ids).Scan(&players).Error
+	if err != nil {
+		fmt.Println("err=", err)
+	}
+	for _, item := range players {
+		fmt.Println("item=", item)
+		playerIds = append(playerIds, item.Id)
+	}
+	fmt.Println("playerIds=", playerIds)
 
+	/*
 	type TbUser struct {
 		Id       int32
 		Username string
@@ -26,6 +57,7 @@ func main() {
 	for _, tbUser := range tbUsers {
 		fmt.Println("tbUser=", tbUser)
 	}
+	 */
 
 	/*
 		type Product struct {
