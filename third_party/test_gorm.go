@@ -8,56 +8,113 @@ import (
 	"time"
 )
 
+type Player struct {
+	Id          int64     `gorm:"column:Id"`
+	Id2         int64     `gorm:"column:Id2"`
+	Nickname    string    `gorm:"column:Nickname"`
+	Sex         int8      `gorm:"column:Sex"`
+	Charm       int64     `gorm:"column:Charm"`
+	Wealth      int64     `gorm:"column:Wealth"`
+	Flags       int64     `gorm:"column:Flags"`
+	Icon        string    `gorm:"column:Icon"`
+	OnlineTime  int64     `gorm:"column:OnlineTime"`
+	OnlineExp   uint32    `gorm:"column:OnlineExp"`
+	ClanId      int32     `gorm:"column:ClanId"`
+	CreateAt    time.Time `gorm:"-"`
+	IsDelete    bool      `gorm:"-"`
+	CharmLevel  int32     `gorm:"-"`
+	WealthLevel int32     `gorm:"-"`
+}
+
+func (_ *Player) TableName() string {
+	return "player"
+}
+
+type ChannelRel struct {
+	Id      int64 `json:"id,omitempty" gorm:"column:id"` // 自增 id
+	OwnerId int64 `json:"owner_id,omitempty"`            // 创建者 id，只有主频道有
+}
+
 func main() {
 	dbDSN := "root:123456@tcp(139.159.144.149:3306)/test"
 	db, err := gorm.Open("mysql", dbDSN)
 	if err != nil {
 		fmt.Println("err=", err)
 	}
-	type Player struct {
-		Id          int64      `gorm:"column:Id"`
-		Id2         int64      `gorm:"column:Id2"`
-		Nickname    string     `gorm:"column:Nickname"`
-		Sex         int8 	    `gorm:"column:Sex"`
-		Charm       int64      `gorm:"column:Charm"`
-		Wealth      int64      `gorm:"column:Wealth"`
-		Flags       int64      `gorm:"column:Flags"`
-		Icon        string     `gorm:"column:Icon"`
-		OnlineTime  int64      `gorm:"column:OnlineTime"`
-		OnlineExp   uint32     `gorm:"column:OnlineExp"`
-		ClanId      int32      `gorm:"column:ClanId"`
-		CreateAt    time.Time  `gorm:"column:CreateAt"`
-		IsDelete    bool       `gorm:"-"`
-		CharmLevel  int32      `gorm:"-"`
-		WealthLevel int32      `gorm:"-"`
-	}
-	players := make([]*Player, 0)
-	ids := []int32{1,2,6}
-	playerIds := make([]int64, 0)
-	err = db.Raw("select Id FROM player WHERE id in (?) ", ids).Scan(&players).Error
+
+	// 提供TableName方法
+	isFind := db.HasTable(&Player{})
+	fmt.Println("isFind=", isFind)
+	//ret := Player{}
+	player := new(Player)
+	err = db.Where("id = 1").First(player).Error
 	if err != nil {
 		fmt.Println("err=", err)
 	}
-	for _, item := range players {
-		fmt.Println("item=", item)
-		playerIds = append(playerIds, item.Id)
-	}
-	fmt.Println("playerIds=", playerIds)
+	fmt.Println("ret=", player)
+
+	// 推导的表名不对 channel_rels
+	//id := 20000101
+	//ret := new(ChannelRel)
+	//err = db.Where("id = ?", id).First(ret).Error // Error 1146: Table 'test.channel_rels' doesn't exist
+	//err = db.Where("id = ?", id).Find(ret).Error // Error 1146: Table 'test.channel_rels' doesn't exist
+	//err = db.Table("channel_rel").Where("id = ?", id).Find(ret).Error
+	//err = db.Table("channel_rel").Where("id = ?", id).First(ret).Error
 
 	/*
-	type TbUser struct {
-		Id       int32
-		Username string
-	}
-	tbUsers := make([]*TbUser, 0)
-	err = db.Raw("select * from tb_user").Scan(&tbUsers).Error
-	if err != nil {
-		fmt.Println("err", err)
-	}
-	for _, tbUser := range tbUsers {
-		fmt.Println("tbUser=", tbUser)
-	}
-	 */
+		ret := make([]ChannelRel, 0)
+		err = db.Where("owner_id = ?", 0).Order("created_at asc").Find(&ret).Error
+		if err != nil {
+			fmt.Println("err=", err)
+		}
+		fmt.Println("ret=", ret)
+	*/
+
+	/*
+		count := 0
+		err = db.Raw("select count(*) from player").Count(&count).Error
+		if err != nil {
+			fmt.Println("err=", err)
+		}
+		fmt.Println("count=", count)
+	*/
+
+	/*
+		ret := Player{}
+		err = db.Raw("select * from player where id = 123456").Scan(&ret).Error
+		if err != nil {
+			fmt.Println("err=", err) // record not found
+		}
+	*/
+	/*
+		players := make([]*Player, 0)
+		ids := []int32{1,2,6}
+		playerIds := make([]int64, 0)
+		err = db.Raw("select Id FROM player WHERE id in (?) ", ids).Scan(&players).Error
+		if err != nil {
+			fmt.Println("err=", err)
+		}
+		for _, item := range players {
+			fmt.Println("item=", item)
+			playerIds = append(playerIds, item.Id)
+		}
+		fmt.Println("playerIds=", playerIds)
+	*/
+
+	/*
+		type TbUser struct {
+			Id       int32
+			Username string
+		}
+		tbUsers := make([]*TbUser, 0)
+		err = db.Raw("select * from tb_user").Scan(&tbUsers).Error
+		if err != nil {
+			fmt.Println("err", err)
+		}
+		for _, tbUser := range tbUsers {
+			fmt.Println("tbUser=", tbUser)
+		}
+	*/
 
 	/*
 		type Product struct {
