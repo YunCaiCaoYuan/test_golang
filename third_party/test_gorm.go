@@ -35,6 +35,10 @@ type ChannelRel struct {
 	OwnerId int64 `json:"owner_id,omitempty"`            // 创建者 id，只有主频道有
 }
 
+func (_ *ChannelRel) TableName() string {
+	return "channel_rel"
+}
+
 func main() {
 	dbDSN := "root:123456@tcp(139.159.144.149:3306)/test"
 	db, err := gorm.Open("mysql", dbDSN)
@@ -42,16 +46,18 @@ func main() {
 		fmt.Println("err=", err)
 	}
 
-	// 提供TableName方法
-	isFind := db.HasTable(&Player{})
-	fmt.Println("isFind=", isFind)
-	//ret := Player{}
-	player := new(Player)
-	err = db.Where("id = 1").First(player).Error
-	if err != nil {
-		fmt.Println("err=", err)
-	}
-	fmt.Println("ret=", player)
+	/*
+		// 提供TableName方法
+		isFind := db.HasTable(&Player{})
+		fmt.Println("isFind=", isFind)
+		//ret := Player{}
+		player := new(Player)
+		err = db.Where("id = 1").First(player).Error
+		if err != nil {
+			fmt.Println("err=", err)
+		}
+		fmt.Println("ret=", player)
+	*/
 
 	// 推导的表名不对 channel_rels
 	//id := 20000101
@@ -61,22 +67,34 @@ func main() {
 	//err = db.Table("channel_rel").Where("id = ?", id).Find(ret).Error
 	//err = db.Table("channel_rel").Where("id = ?", id).First(ret).Error
 
+	ret := make([]ChannelRel, 0)
+	err = db.Where("owner_id = ?", 0).Order("created_at asc").Find(&ret).Error
+	if err != nil {
+		fmt.Println("err=", err)
+	}
+	fmt.Println("ret=", ret)
+
 	/*
-		ret := make([]ChannelRel, 0)
-		err = db.Where("owner_id = ?", 0).Order("created_at asc").Find(&ret).Error
+		type countInfo struct {
+			Count int32
+		}
+		var count countInfo
+		err = db.Raw("select count(*) as count from player").Scan(&count).Error
+		//count := 0
+		//err = db.Raw("select count(*) from player").Count(&count).Error
 		if err != nil {
 			fmt.Println("err=", err)
 		}
-		fmt.Println("ret=", ret)
+		fmt.Println("count=", count, "count.Count=", count.Count)
 	*/
 
 	/*
-		count := 0
-		err = db.Raw("select count(*) from player").Count(&count).Error
+		players := make([]Player, 0)
+		err = db.Raw("select * from player").Where(" id = ? ", 1).Scan(&players).Error // 语法错误
 		if err != nil {
 			fmt.Println("err=", err)
 		}
-		fmt.Println("count=", count)
+		fmt.Println("players=", players)
 	*/
 
 	/*
