@@ -12,6 +12,7 @@ const (
 	Key     = "2fb875ae24ef13d152a073a906825ff4"
 )
 
+/*
 type HttpResult struct {
 	ErrorCode int32       `json:"error_code"`
 	Reason    string      `json:"reason"`
@@ -34,6 +35,7 @@ type JuheItem struct {
 	ThumbnailPicS02 string `json:"thumbnail_pic_s02"`
 	ThumbnailPicS03 string `json:"thumbnail_pic_s03"`
 }
+*/
 
 func main() {
 	juheUrl := fmt.Sprintf("http://v.juhe.cn/toutiao/index?type=%s&key=%s", NewType, Key)
@@ -49,15 +51,28 @@ func main() {
 		return
 	}
 
-	httpResult := new(HttpResult)
+	//httpResult := new(HttpResult)
+	var httpResult map[string]interface{}
 	err = json.Unmarshal(b, &httpResult) // 参数无法解析直接丢弃
 	if err != nil {
 		fmt.Println("json unmarshal failed,err:", err)
 		return
 	}
-	if httpResult.ErrorCode == 0 {
-		for k, v := range httpResult.Result.Data {
-			fmt.Printf("%d、%s %s\n", k+1, v.Title, v.Url)
+
+	errorCode := httpResult["error_code"]
+	result := httpResult["result"]
+	if errorCode.(float64) == 0 {
+		data := result.(map[string]interface{})["data"]
+		dataList := data.([]interface{})
+		for k, v := range dataList {
+			val := v.(map[string]interface{})
+			fmt.Printf("%d、%s %s\n", k+1, val["title"], val["url"])
 		}
 	}
+
+	//if httpResult.ErrorCode == 0 {
+	//	for k, v := range httpResult.Result.Data {
+	//		fmt.Printf("%d、%s %s\n", k+1, v.Title, v.Url)
+	//	}
+	//}
 }
