@@ -16,6 +16,12 @@ func Shownode(p *Node) { //遍历
 
 // 头插法
 func main() {
+	var list []int64
+	fmt.Println("list=", list)
+	list = append(list, 1,2)
+	fmt.Println("list2=", list)
+
+	/*
 	var head = new(Node)
 	head.data = 0
 	var tail *Node
@@ -27,4 +33,5 @@ func main() {
 	}
 
 	Shownode(tail) //遍历结果
+	 */
 }
