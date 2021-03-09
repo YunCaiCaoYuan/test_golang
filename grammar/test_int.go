@@ -1,11 +1,12 @@
 package main
 
-import (
-	"fmt"
-	"unsafe"
-)
+import "fmt"
 
 func main() {
+	var intval int64
+	fmt.Println("intval=", intval)
+
+	/*
 	var i1 int = 1
 	var i2 int8 = 2
 	var i3 int16 = 3
@@ -16,4 +17,5 @@ func main() {
 	fmt.Println(unsafe.Sizeof(i3)) // 2
 	fmt.Println(unsafe.Sizeof(i4)) // 4
 	fmt.Println(unsafe.Sizeof(i5)) // 8
+	 */
 }
