@@ -1,15 +1,13 @@
 package main
 
 // 成功！！！
-
 import (
 	"fmt"
 	"github.com/sbinet/go-python"
 	"os"
 )
 
-
-
+// 初始化
 func init()  {
 	err := python.Initialize()
 	if err != nil {
@@ -94,8 +92,8 @@ func main()  {
 	//fmt.Println("exec dir=", wd)
 
 	dir := os.Getenv("DIR")
-	fmt.Println(dir)
-	if dir != ""{
+	fmt.Println("DIR:", dir)
+	if dir != "" {
 		os.Chdir(dir)
 	} else {
 		os.Chdir("/Users/sunbin/study/test_golang/advanced")
@@ -118,7 +116,7 @@ func main()  {
 	}
 	statusCode := res.GetAttrString("status_code")
 	content := res.GetAttrString("content")
-	fmt.Println(python.PyInt_AS_LONG(statusCode))
-	fmt.Println(python.PyString_AS_STRING(content))
+	fmt.Println("statusCode:", python.PyInt_AS_LONG(statusCode))
+	fmt.Println("content:", python.PyString_AS_STRING(content))
 
 }
