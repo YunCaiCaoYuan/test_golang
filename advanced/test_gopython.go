@@ -1,7 +1,5 @@
 package main
 
-import 	"C" //需要C库的支持，方便类型转换
-
 // !!! 未通过
 // python2
 import (
