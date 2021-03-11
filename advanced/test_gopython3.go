@@ -2,6 +2,7 @@ package main
 
 // !!! 未通过
 // python3
+
 import (
 	"fmt"
 	"github.com/YunCaiCaoYuan/go-python3"

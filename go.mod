@@ -5,7 +5,7 @@ go 1.12
 require github.com/jinzhu/gorm v1.9.16
 
 require (
-	github.com/YunCaiCaoYuan/go-python3 v0.0.0-20191126174558-6ed25e33b3c4
+	github.com/YunCaiCaoYuan/go-python3 v0.0.0-20210311031402-764ace0de754
 	github.com/go-redis/redis v6.15.9+incompatible
 	github.com/goburrow/cache v0.1.3
 	github.com/onsi/ginkgo v1.15.0 // indirect
