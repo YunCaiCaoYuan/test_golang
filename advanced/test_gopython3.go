@@ -4,12 +4,11 @@ package main
 // python3
 import (
 	"fmt"
-	"github.com/DataDog/go-python3"
+	"github.com/YunCaiCaoYuan/go-python3"
 	"os"
 )
 
 func main() {
-	/*
 	i, err := python3.Py_Main(os.Args)
 	if err != nil {
 		fmt.Printf("error launching the python interpreter: %s\n", err)
@@ -23,8 +22,8 @@ func main() {
 		fmt.Println("The parameter list does not represent a valid Python command line")
 		os.Exit(1)
 	}
-	 */
 
+	/*
 	python3.Py_Initialize()
 	if !python3.Py_IsInitialized() {
 		fmt.Println("Error initializing the python interpreter")
@@ -43,6 +42,7 @@ func main() {
 	fmt.Println("re1:", python3.PyLong_AsLong(re1))
 	fmt.Println("re2:", python3.PyLong_AsLong(re2))
 	python3.Py_Finalize()
+	 */
 }
 
 // ImportModule will import python module from given directory

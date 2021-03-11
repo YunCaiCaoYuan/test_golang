@@ -1,8 +1,8 @@
 github.com/BurntSushi/toml v0.3.1 h1:WXkYYl6Yr3qBf1K79EBnL4mak0OimBfB0XUf9Vl28OQ=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
-github.com/DataDog/go-python3 v0.0.0-20191126174558-6ed25e33b3c4 h1:QeqJzUd2qeHQPWG+gGVCZXD9VhsWfHfmlSVe5MjkEds=
-github.com/DataDog/go-python3 v0.0.0-20191126174558-6ed25e33b3c4/go.mod h1:7ctnOCLiUlwKO9GvAjusUF68edSbiHqC18gVPQF0ojA=
 github.com/PuerkitoBio/goquery v1.5.1/go.mod h1:GsLWisAFVj4WgDibEWF4pvYnkVQBpKBKeU+7zCJoLcc=
+github.com/YunCaiCaoYuan/go-python3 v0.0.0-20191126174558-6ed25e33b3c4 h1:NWSx/1x/exsm5J+TJsiT/mWrAGbQFdTiSlm/cufqUoI=
+github.com/YunCaiCaoYuan/go-python3 v0.0.0-20191126174558-6ed25e33b3c4/go.mod h1:epF8j2Rd8ALiTjG0PQYT2IW2QBGwe4LQ4zSrMqhREY0=
 github.com/andybalholm/cascadia v1.1.0/go.mod h1:GsXiBklL0woXo1j/WYWtSYYC4ouU9PqHO0sqidkEA4Y=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=

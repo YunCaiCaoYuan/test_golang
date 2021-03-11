@@ -2,7 +2,6 @@ package main
 
 // 成功！！！
 import (
-	"fmt"
 	"github.com/sbinet/go-python"
 	"os"
 )
@@ -17,10 +16,8 @@ func init()  {
 
 func main()  {
 	// 例子1:
-	/*
 	rc := python.Py_Main(os.Args)
 	os.Exit(rc)
-	*/
 
 	// 例子2:打印路径
 	/*
@@ -70,6 +67,7 @@ func main()  {
 	 */
 
 	// 例子4:
+	/*
 	m := python.PyImport_ImportModule("sys")
 	if m == nil {
 		fmt.Println("import error1")
@@ -118,5 +116,5 @@ func main()  {
 	content := res.GetAttrString("content")
 	fmt.Println("statusCode:", python.PyInt_AS_LONG(statusCode))
 	fmt.Println("content:", python.PyString_AS_STRING(content))
-
+	 */
 }
