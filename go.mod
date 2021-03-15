@@ -6,6 +6,7 @@ require github.com/jinzhu/gorm v1.9.16
 
 require (
 	github.com/YunCaiCaoYuan/go-python3 v0.0.0-20210311031402-764ace0de754
+	github.com/aliyun/aliyun-oss-go-sdk v2.1.6+incompatible // indirect
 	github.com/go-redis/redis v6.15.9+incompatible
 	github.com/goburrow/cache v0.1.3
 	github.com/onsi/ginkgo v1.15.0 // indirect
@@ -15,5 +16,6 @@ require (
 	github.com/sbinet/go-python v0.1.0
 	github.com/vmihailenco/msgpack v3.3.3+incompatible
 	go.uber.org/zap v1.16.0
+	golang.org/x/time v0.0.0-20210220033141-f8bda1e9f3ba // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 )
