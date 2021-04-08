@@ -5,6 +5,8 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
+	"github.com/qiniu/x/log"
+	"go.uber.org/zap"
 	"time"
 )
 
@@ -68,12 +70,25 @@ type ChannelRel struct {
 
 func main() {
 	//dbDSN := "root:123456@tcp(139.159.144.149:3306)/test?charset=utf8mb4&collation=utf8mb4_unicode_ci&parseTime=True&loc=Local"
-	dbDSN := "root:123456@tcp(139.159.144.149:3306)/test?parseTime=True"
+	//dbDSN := "root:123456@tcp(139.159.144.149:3306)/test?parseTime=True"
+	dbDSN := "root:123456@tcp(127.0.0.1:3306)/test?parseTime=True"
 	db, err := gorm.Open("mysql", dbDSN)
 	if err != nil {
 		fmt.Println("err=", err)
 	}
 
+	type countStruct struct {
+		Count int32 `gorm:"column:count"`
+	}
+	var countVar countStruct
+	id2 := 123482
+	err = db.Raw("select count(*) count from player where id2 = ? ", id2).Scan(&countVar).Error
+	if err != nil {
+		log.Error("IsId2Used fail", zap.Any("err", err))
+	}
+	fmt.Println("countVar.Count=", countVar.Count)
+
+	/*
 	// 提供TableName方法
 	isFind := db.HasTable(&Player{})
 	fmt.Println("isFind=", isFind)
@@ -84,6 +99,7 @@ func main() {
 		fmt.Println("err=", err)
 	}
 	fmt.Println("player.Facade=", player.Facade)
+	 */
 
 	// 推导的表名不对 channel_rels
 	//id := 20000101
