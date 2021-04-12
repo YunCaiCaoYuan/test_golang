@@ -7,7 +7,11 @@ type ChannelRel struct {
 }
 
 func main() {
+	/*
 	rels := make([]*ChannelRel, 0)
 	fmt.Println(len(rels))
-	fmt.Println(rels)
+	fmt.Println(rels)*/
+
+	slice := []int{1,2}
+	fmt.Println(slice[:4]) // panic: runtime error: slice bounds out of range
 }
