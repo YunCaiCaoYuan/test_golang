@@ -111,11 +111,20 @@ func get(k string) string {
 
 //examples
 func main() {
+	/*
 	getInstance()
 	put("a", "a_put")
 	put("b", "b_put")
 	fmt.Println(get("a"))
 	fmt.Println(get("b"))
 	put("p", "p_put")
-	fmt.Println(get("p"))
+	fmt.Println(get("p"))*/
+
+	testMap := make(map[int32]string)
+	testMap[1] = "a"
+	fmt.Println("testMap[2]=", testMap[2])
+	fmt.Printf("type testMap[2]=%T\n", testMap[2])
+	if testMap[2] == "" {
+		fmt.Println("testMap[2] is nil string ")
+	}
 }
