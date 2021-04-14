@@ -1,8 +1,7 @@
 package main
 
 import (
-	"bytes"
-	"fmt"
+	"sync"
 )
 
 /*
@@ -78,6 +77,7 @@ func main() {
 	fmt.Println("data == decoded: ", reflect.DeepEqual(data, decoded))    // false
 }
  */
+/*
 func main() {
 	var b1 []byte = nil
 	b2 := []byte{}
@@ -85,4 +85,34 @@ func main() {
 	// b1 与 b2 长度相等、有相同的字节序
 	// nil 与 slice 在字节上是相同的
 	fmt.Println("b1 == b2: ", bytes.Equal(b1, b2))    // true
+}
+*/
+/*
+// 类型以字段形式直接嵌入
+type myLocker struct {
+	sync.Mutex
+}
+
+func main() {
+	var locker myLocker
+	locker.Lock()
+	locker.Unlock()
+}
+ */
+/*
+type myLocker sync.Locker
+
+func main() {
+	var locker myLocker
+	locker.Lock()
+	locker.Unlock()
+}
+ */
+// 定义 Mutex 的自定义类型
+type myMutex sync.Mutex
+
+func main() {
+	var mtx myMutex
+	mtx.Lock()
+	mtx.UnLock()
 }
