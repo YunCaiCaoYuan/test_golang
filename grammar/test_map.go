@@ -109,8 +109,19 @@ func get(k string) string {
 	return ""
 }
 
+
+
 //examples
 func main() {
+	type data struct {
+		name string
+	}
+	m := map[string]*data{
+		"x": {"Tom"},
+	}
+	m["x"].name = "Jerry"    // 直接修改 m["x"] 中的字段
+	fmt.Println(m["x"])    // &{Jerry}
+
 	/*
 	getInstance()
 	put("a", "a_put")
@@ -119,12 +130,25 @@ func main() {
 	fmt.Println(get("b"))
 	put("p", "p_put")
 	fmt.Println(get("p"))*/
-
+	/*
 	testMap := make(map[int32]string)
 	testMap[1] = "a"
 	fmt.Println("testMap[2]=", testMap[2])
 	fmt.Printf("type testMap[2]=%T\n", testMap[2])
 	if testMap[2] == "" {
 		fmt.Println("testMap[2] is nil string ")
+	}*/
+	/*
+	// 提取整个 struct 到局部变量中，修改字段值后再整个赋值
+	type data struct {
+		name string
 	}
+	m := map[string]data{
+		"x": {"Tom"},
+	}
+	r := m["x"]
+	r.name = "Jerry"
+	m["x"] = r
+	fmt.Println(m)    // map[x:{Jerry}]
+	 */
 }
