@@ -113,6 +113,14 @@ func get(k string) string {
 
 //examples
 func main() {
+	intMap := make(map[int]string)
+	intMap[11] = "a"
+	intMap[22] = "b"
+	for i := range intMap{
+		println("i=", i)
+	}
+
+	/*
 	type data struct {
 		name string
 	}
@@ -121,7 +129,7 @@ func main() {
 	}
 	m["x"].name = "Jerry"    // 直接修改 m["x"] 中的字段
 	fmt.Println(m["x"])    // &{Jerry}
-
+	*/
 	/*
 	getInstance()
 	put("a", "a_put")
