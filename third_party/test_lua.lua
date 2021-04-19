@@ -95,6 +95,7 @@ print("---------")
 print(serialize(unserialize(sz)))
 ]]--
 
+--[[
 local mt = setmetatable(_G, nil)
 function serialize(obj)
     local lua = ""
@@ -161,5 +162,15 @@ dur_data_str = serialize(dur_data)
 redis.call('SET', KEYS[1], dur_data_str);
 redis.call('EXPIRE', KEYS[1], 7*24*3600);
 return 1
-
 -- redis-cli  --eval test_lua.lua  "key_sunbin" , 6
+]]--
+
+local dur_data_str = redis.call('GET', KEYS[1]);
+local dur_data = unserialize(dur_data_str)
+if dur_data and dur_data["duration"] then
+    return dur_data["duration"]
+else
+    return 0
+end;
+
+-- redis-cli  --eval test_lua.lua  "key_sunbin"

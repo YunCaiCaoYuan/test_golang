@@ -1,21 +1,15 @@
 package main
 
 import (
-	"fmt"
-	"log"
 	//"git.2tianxin.com/platform/utils/uredis"
 	"github.com/go-redis/redis"
 	"strings"
 	"time"
 )
+import "fmt"
+import "log"
 
-func main() {
-	host := "127.0.0.1:6379"
-	pwd := ""
-	db := 0
-	RedisCon := New(host, pwd, db)
-
-	const incrScript = `
+const funcScript = `
 local mt = setmetatable(_G, nil)
 function serialize(obj)
     local lua = ""
@@ -63,6 +57,15 @@ function unserialize(lua)
 end
 setmetatable(_G, mt)
 
+`
+
+func main() {
+	host := "127.0.0.1:6379"
+	pwd := ""
+	db := 0
+	RedisCon := New(host, pwd, db)
+	/*
+	const incrScript = funcScript + `
 local dur_data_str = redis.call('GET', KEYS[1]);
 local dur_data = unserialize(dur_data_str)
 if not dur_data then
@@ -83,13 +86,30 @@ redis.call('SET', KEYS[1], dur_data_str);
 redis.call('EXPIRE', KEYS[1], 7*24*3600);
 return 1
 	`
-	key := fmt.Sprintf("SC:PlayerDailyDuration:%d:%d:%s", 101, 102, "20210102")
+	key := fmt.Sprintf("SC:PlayerDailyDuration:%d:%d:%s", 101, 103, "20210102")
 	now := time.Now().Unix()
 	res, err := redis.NewScript(incrScript).Run(RedisCon, []string{key}, now).Int()
 	if err != nil {
 		log.Println("err happen:", err)
 	}
 	log.Println("res:", res)
+	*/
+	///*
+	const incrScript = funcScript + `
+local dur_data_str = redis.call('GET', KEYS[1]);
+local dur_data = unserialize(dur_data_str)
+if dur_data and dur_data["duration"] then
+    return dur_data["duration"]
+else
+    return 0
+end;`
+	key := fmt.Sprintf("SC:PlayerDailyDuration:%d:%d:%s", 101, 104, "20210102")
+	res, err := redis.NewScript(incrScript).Run(RedisCon, []string{key}).Int()
+	if err != nil {
+		log.Println("err happen:", err)
+	}
+	log.Println("res:", res)
+	//*/
 
 	/*
 		const incrScript = `
