@@ -16,6 +16,7 @@ func main() {
 	RedisCon := New(host, pwd, db)
 
 	const incrScript = `
+local mt = setmetatable(_G, nil)
 function serialize(obj)
     local lua = ""
     local t = type(obj)
@@ -60,6 +61,7 @@ function unserialize(lua)
     end
     return func()
 end
+setmetatable(_G, mt)
 
 local dur_data_str = redis.call('GET', KEYS[1]);
 local dur_data = unserialize(dur_data_str)
@@ -68,7 +70,7 @@ if not dur_data then
     dur_data["updated_at"] = ARGV[1]
 else
     local diff = ARGV[1] - dur_data["updated_at"]
-    if 30 < diff and diff < 120 then
+    if 1 < diff and diff < 120 then
         if not dur_data["duration"] then
             dur_data["duration"] = 0
         end
@@ -79,7 +81,7 @@ end;
 dur_data_str = serialize(dur_data)
 redis.call('SET', KEYS[1], dur_data_str);
 redis.call('EXPIRE', KEYS[1], 7*24*3600);
-return 1;
+return 1
 	`
 	key := fmt.Sprintf("SC:PlayerDailyDuration:%d:%d:%s", 101, 102, "20210102")
 	now := time.Now().Unix()
