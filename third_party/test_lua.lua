@@ -96,8 +96,8 @@ print(serialize(unserialize(sz)))
 ]]--
 
 --[[
-local mt = setmetatable(_G, nil)
-function serialize(obj)
+--local mt = setmetatable(_G, nil)
+local function serialize(obj)
     local lua = ""
     local t = type(obj)
     if t == "number" then
@@ -125,7 +125,7 @@ function serialize(obj)
     end
     return lua
 end
-function unserialize(lua)
+local function unserialize(lua)
     local t = type(lua)
     if t == "nil" or lua == "" then
         return nil
@@ -141,8 +141,9 @@ function unserialize(lua)
     end
     return func()
 end
-setmetatable(_G, mt)
-
+--setmetatable(_G, mt)
+]]--
+--[[
 local dur_data_str = redis.call('GET', KEYS[1]);
 local dur_data = unserialize(dur_data_str)
 if not dur_data then
@@ -165,6 +166,7 @@ return 1
 -- redis-cli  --eval test_lua.lua  "key_sunbin" , 6
 ]]--
 
+--[[
 local dur_data_str = redis.call('GET', KEYS[1]);
 local dur_data = unserialize(dur_data_str)
 if dur_data and dur_data["duration"] then
@@ -172,5 +174,45 @@ if dur_data and dur_data["duration"] then
 else
     return 0
 end;
+]]--
 
 -- redis-cli  --eval test_lua.lua  "key_sunbin"
+
+
+--local cjson = require "cjson"
+--[[
+local dur_data = redis.call('GET', KEYS[1])
+local dur_data_str = ""
+if not dur_data then
+    dur_data = {
+        ["updated_at"] = ARGV[1]
+    }
+else
+    dur_data = cjson.decode(dur_data)
+    local diff = ARGV[1] - dur_data["updated_at"]
+    if 1 < diff and diff < 120 then
+        if not dur_data["duration"] then
+            dur_data["duration"] = 0
+        end
+        dur_data["duration"] = dur_data["duration"] + diff
+    end
+    dur_data["updated_at"] = ARGV[1]
+end
+dur_data_str = cjson.encode(dur_data)
+redis.call('SET', KEYS[1], dur_data_str)
+redis.call('EXPIRE', KEYS[1], 7*24*3600)
+return dur_data_str
+]]--
+
+
+local dur_data = redis.call('GET', KEYS[1])
+if dur_data then
+    dur_data = cjson.decode(dur_data)
+    if dur_data["duration"] then
+        return dur_data["duration"]
+    else
+        return 0
+    end
+else
+    return 0
+end
