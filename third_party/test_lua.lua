@@ -204,7 +204,6 @@ redis.call('EXPIRE', KEYS[1], 7*24*3600)
 return dur_data_str
 ]]--
 
-
 local dur_data = redis.call('GET', KEYS[1])
 if dur_data then
     dur_data = cjson.decode(dur_data)
