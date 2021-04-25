@@ -1,9 +1,7 @@
 package main
 
-import (
-	"fmt"
-	"time"
-)
+import "time"
+import "fmt"
 
 func main() {
 	/*
@@ -21,9 +19,18 @@ func main() {
 	println("uint64 timeAdd=", timeAdd)
 	 */
 
+	/*
 	now := time.Now().Unix()
 	fmt.Println("now=", now)
+	 */
 
+	/*
+	now := time.Now().UnixNano()
+	fmt.Println("now=", now) //  1619320725105078000
+	 */
+
+	nowStr := fmt.Sprintf("%d", time.Now().UnixNano())
+	fmt.Println("nowStr=", nowStr) //  1619320725105078000
 
 	/*
 	timeUsed := time.Duration(148104536007)
