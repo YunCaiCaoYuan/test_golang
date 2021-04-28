@@ -1,8 +1,26 @@
 package main
 
 import (
-	"sync"
+	"fmt"
+	"math/rand"
+	"time"
 )
+
+func main() {
+	var v interface{}
+
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	for i := 0; i < 10; i++{
+		v = i
+		if (r.Intn(100) % 2) == 0 {
+			v = "hello"
+		}
+
+		if _, ok := v.(int); ok {
+			fmt.Printf("%d\n", v)
+		}
+	}
+}
 
 /*
 type data struct {
@@ -108,7 +126,9 @@ func main() {
 	locker.Unlock()
 }
  */
+
 // 定义 Mutex 的自定义类型
+/*
 type myMutex sync.Mutex
 
 func main() {
@@ -116,3 +136,4 @@ func main() {
 	mtx.Lock()
 	mtx.UnLock()
 }
+ */
