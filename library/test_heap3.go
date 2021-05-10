@@ -3,9 +3,11 @@ package main
 import (
 	"container/heap"
 	"fmt"
+	"github.com/YunCaiCaoYuan/test_golang/library/common"
 	"sort"
 )
 
+/*
 type Item struct {
 	Value int // 对应id
 	Score int // 对应排序字段
@@ -32,20 +34,23 @@ func (mh *MinHeap) Pop() interface{} {
 	*mh = old[0 : n-1]
 	return item
 }
+*/
 
 func Example_MinHeap() {
-	mh := make(MinHeap, 0)
+	mh := make(common.MinHeap, 0)
 	items := map[int]int{
-		111: 3, 222: 2, 333: 4, 444: 1, 555: 9, 666 :8,
+		20001555: 1, 20106042: 11, 20102517: 10, 20106169: 10, 20103680: 10, 20102826 :10,
 	}
 	for value, priority := range items {
-		item := &Item{
+		item := &common.Item{
 			Value: value,
 			Score: priority,
 		}
 		heap.Push(&mh, item)
+		//(*common.MinHeap).Push(&mh, item)
 		if mh.Len() > 4 {
 			heap.Pop(&mh)
+			//(*common.MinHeap).Pop(&mh)
 		}
 	}
 	//for mh.Len() > 0 {
