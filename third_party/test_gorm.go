@@ -77,6 +77,20 @@ func main() {
 		fmt.Println("err=", err)
 	}
 
+	// Pluck
+	//var ids []int64
+	type id struct {
+		Id          int64      `gorm:"column:Id"`
+	}
+	ids := make([]id, 0)
+	//err = db.Raw("select id from player where Point>0 ").Pluck("id", &ids).Error
+	err = db.Raw("select Id from player where Point>0 ").Scan(&ids).Error
+	if err != nil {
+		log.Error("Pluck fail", zap.Any("err", err))
+	}
+	fmt.Println("ids=", ids)
+
+	/*
 	type countStruct struct {
 		Count int32 `gorm:"column:count"`
 	}
@@ -87,6 +101,7 @@ func main() {
 		log.Error("IsId2Used fail", zap.Any("err", err))
 	}
 	fmt.Println("countVar.Count=", countVar.Count)
+	*/
 
 	/*
 	// 提供TableName方法
