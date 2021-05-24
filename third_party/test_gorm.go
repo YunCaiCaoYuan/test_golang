@@ -77,6 +77,21 @@ func main() {
 		fmt.Println("err=", err)
 	}
 
+	//type countStruct struct {
+	//	Point int32 	`gorm:"column:Point"`
+	//}
+	//countVar := countStruct{}
+	countVar := int32(0)
+	//err = db.Raw("select Point from player where Id=1001082 ").Scan(&countVar).Error
+	//err = db.Raw("select count(*) from player where Id=1001082 ").Count(&countVar).Error
+	//err = db.Raw("select max(Id) from player where Id=1001082 ").Count(&countVar).Error // 1001082
+	err = db.Raw("select Point from player where Id=1001082 ").Count(&countVar).Error // 94
+	if err != nil {
+		log.Error("select fail", zap.Any("err", err))
+	}
+	fmt.Println("point=", countVar)
+
+	/*
 	// Pluck
 	//var ids []int64
 	type id struct {
@@ -89,6 +104,7 @@ func main() {
 		log.Error("Pluck fail", zap.Any("err", err))
 	}
 	fmt.Println("ids=", ids)
+	*/
 
 	/*
 	type countStruct struct {
