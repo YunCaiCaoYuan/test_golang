@@ -114,10 +114,10 @@ func get(k string) string {
 //examples
 func main() {
 	intMap := make(map[int]string)
-	intMap[11] = "a"
 	intMap[22] = "b"
-	for i := range intMap{
-		println("i=", i)
+	intMap[11] = "a"
+	for i := range intMap {
+		println("i=", i) // 无序
 	}
 
 	/*

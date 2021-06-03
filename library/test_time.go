@@ -3,7 +3,43 @@ package main
 import "time"
 import "fmt"
 
+func GetChanStarUpgradeCycle(t time.Time) (begin time.Time, statisticEnd time.Time, cycleEnd time.Time) {
+	year, month, _ := t.Date()
+	var (
+		splitDate = time.Date(year, month, 16, 0, 0, 0, 0, t.Location())
+	)
+	if t.Sub(splitDate) > 0 {
+		if month == time.February {
+			statisticEnd = time.Date(year, month, 27, 0, 0, 0, 0, t.Location())
+		} else {
+			statisticEnd = time.Date(year, month, 29, 0, 0, 0, 0, t.Location())
+		}
+		begin = time.Date(year, month, 16, 0, 0, 0, 0, t.Location())
+		cycleEnd = time.Date(year, month+1, 1, 0, 0, 0, 0, t.Location()).Add(-1)
+	} else {
+		begin = time.Date(year, month, 1, 0, 0, 0, 0, t.Location())
+		statisticEnd = time.Date(year, month, 14, 0, 0, 0, 0, t.Location())
+		cycleEnd = time.Date(year, month, 16, 0, 0, 0, 0, t.Location()).Add(-1)
+	}
+
+	return
+}
+
 func main() {
+	//now := time.Now()
+	now := time.Now().Add(time.Duration(60) * time.Second)
+	fmt.Println("now=", now)
+	begin,_,_ := GetChanStarUpgradeCycle(now)
+	fmt.Println("begin=", begin)
+	begin_format := begin.Format("2006/01/02")
+	fmt.Println("begin_format=", begin_format)
+	//format := now.Format("2006")
+	//fmt.Println("format=", format)
+	//format2 := now.Format("01-02")
+	//fmt.Println("format2=", format2)
+	//format3 := now.Format("01/02")
+	//fmt.Println("format3=", format3)
+
 	/*
 	nowStr := time.Now()
 	fmt.Println("nowStr=", nowStr)
@@ -27,6 +63,7 @@ func main() {
 	fmt.Println("Time2=", Time)
 	*/
 
+	/*
 	timeSec := time.Now().Unix()
 	fmt.Println("timeSec1=", timeSec)
 	if timeSec > 0 {
@@ -34,6 +71,7 @@ func main() {
 		fmt.Println("timeSec2=", timeSec)
 	}
 	fmt.Println("timeSec3=", timeSec)
+	 */
 
 	/*
 	loc, _ := time.LoadLocation("Europe/Berlin")

@@ -21,7 +21,8 @@ func main() {
  */
 func main() {
 	data := []*struct{ num int }{{1}, {2}, {3},}
-	for _, v := range data {
+	for index, v := range data {
+		fmt.Println("index=", index) // 下标从0开始
 		v.num *= 10    // 直接使用指针更新
 	}
 	fmt.Println(data[0], data[1], data[2])    // &{10} &{20} &{30}
