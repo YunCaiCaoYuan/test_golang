@@ -26,19 +26,19 @@ func GetChanStarUpgradeCycle(t time.Time) (begin time.Time, statisticEnd time.Ti
 }
 
 func main() {
-	//now := time.Now()
-	now := time.Now().Add(time.Duration(60) * time.Second)
-	fmt.Println("now=", now)
-	begin,_,_ := GetChanStarUpgradeCycle(now)
-	fmt.Println("begin=", begin)
-	begin_format := begin.Format("2006/01/02")
-	fmt.Println("begin_format=", begin_format)
+	now := time.Now()
+	//now := time.Now().Add(time.Duration(60) * time.Second)
+	//fmt.Println("now=", now)
+	//begin,_,_ := GetChanStarUpgradeCycle(now)
+	//fmt.Println("begin=", begin)
+	//begin_format := begin.Format("2006/01/02")
+	//fmt.Println("begin_format=", begin_format)
 	//format := now.Format("2006")
 	//fmt.Println("format=", format)
 	//format2 := now.Format("01-02")
 	//fmt.Println("format2=", format2)
-	//format3 := now.Format("01/02")
-	//fmt.Println("format3=", format3)
+	format3 := now.Format("01月02日")
+	fmt.Println("format3=", format3)
 
 	/*
 	nowStr := time.Now()
