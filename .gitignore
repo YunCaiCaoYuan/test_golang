@@ -7,4 +7,5 @@ a.txt
 *.pickle
 profile*
 *.prof
+test_pprof2
 pprof
