@@ -7,7 +7,7 @@ import (
 
 func main() {
 	fmt.Println(runtime.GOMAXPROCS(-1))    // 4
-	fmt.Println(runtime.NumCPU())    // 4
+	fmt.Println(runtime.NumCPU())    		  // 4
 	runtime.GOMAXPROCS(20)
 	fmt.Println(runtime.GOMAXPROCS(-1))    // 20
 	runtime.GOMAXPROCS(300)
