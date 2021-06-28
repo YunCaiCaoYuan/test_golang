@@ -1,9 +1,6 @@
 package main
 
-import (
-	"fmt"
-	"time"
-)
+import "fmt"
 
 // break 配合 label 跳出指定代码块
 /*
@@ -34,7 +31,22 @@ func main() {
 	// 输出 three three three
 }
  */
+
+type testStruct struct {
+	id int32
+	name string
+}
+func returnList() []*testStruct {
+	return nil
+}
 func main() {
+	list := returnList()
+	for _,item := range list {
+		fmt.Println("item=", item)
+	}
+	fmt.Println(list)
+
+	/*
 	data := []string{"one", "two", "three"}
 
 	for _, v := range data {
@@ -44,5 +56,6 @@ func main() {
 	}
 
 	time.Sleep(3 * time.Second)
+	 */
 	// 输出 one two three
 }
