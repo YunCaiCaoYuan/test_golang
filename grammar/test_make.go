@@ -1,6 +1,10 @@
 package main
 
-import "reflect"
+import (
+	"fmt"
+	"reflect"
+	"unsafe"
+)
 
 type test struct {
 	Count int
@@ -11,9 +15,42 @@ func (u *test) TableName() string {
 	return "channel_skip_id"
 }
 
+func returnSlice() []int32 {
+	list := make([]int32, 0)
+	var v1,v2 int32 = 1,2
+	list = append(list, v1, v2)
+	fmt.Printf("list1=%p\n", &list)
+	fmt.Println("list1=", list)
+	fmt.Printf("list1 =%p\n", &list[0])
+	return list
+}
+
+func returnStructSlice() []*test {
+	list := make([]*test, 0, 2)
+	list = append(list, &test{Count: 1},&test{Count: 2})
+	sh:= (*reflect.SliceHeader)(unsafe.Pointer(&list))
+	fmt.Printf("list1=%p\n", list)
+	fmt.Println("list1=", list)
+	fmt.Printf("list1 =%p\n", &list[0])
+	fmt.Println("list1 0=", sh)
+	return list
+}
+
 func main() {
+	list := returnStructSlice() // 上层结构浅拷贝，底层地址不变
+	fmt.Printf("list2=%p\n", &list)
+	fmt.Println("list2=", list)
+	fmt.Printf("list2=%p\n", &list[0])
+	//list1=0xc00000c0a0
+	//list1= [0xc00001a090 0xc00001a0a0]
+	//list2=0xc00000c080
+	//list2= [0xc00001a090 0xc00001a0a0]
+
+
+	/*
 	const test = 4
-	println(reflect.TypeOf(test).Name())
+	println(reflect.TypeOf(test).Name()) // int
+	 */
 
 	// 测试不用make给切片分配内存，testList=nil
 	//var testList []*test

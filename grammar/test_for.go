@@ -40,11 +40,31 @@ func returnList() []*testStruct {
 	return nil
 }
 func main() {
+	var i int32 = 0
+	closeChan := make(chan int)
+	go func() {
+		for {
+			fmt.Println("i=", i)
+			i++
+			if i == 10 {
+				fmt.Println("goroutine close")
+				closeChan <- 10
+				//return
+				break
+			}
+		}
+	}()
+
+	<- closeChan
+	fmt.Println("main close")
+
+	/*
 	list := returnList()
 	for _,item := range list {
 		fmt.Println("item=", item)
 	}
 	fmt.Println(list)
+	 */
 
 	/*
 	data := []string{"one", "two", "three"}
