@@ -1,12 +1,18 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 type ChannelRel struct {
 	ID int64 `json:"id,omitempty" gorm:"column:id"` // 自增 id
 }
+
+func main() {
+	list := make([]int32, 7)
+	fmt.Println("len(list)=", len(list), " cap(list)=", cap(list))
+	list2 := make([]int32, 0, 7)
+	fmt.Println("len(list2)=", len(list2), " cap(list2)=", cap(list2))
+}
+
 /*
 func main() {
 	//rels := make([]*ChannelRel, 0)
@@ -79,7 +85,9 @@ func main() {
 	println("new path: ", string(path))    // AAAAsuffix/BBBBBBBBB
 }
 */
+
 // 超过容量将重新分配数组来拷贝值、重新存储
+/*
 func main() {
 	s1 := []int{1, 2, 3}
 	fmt.Println(len(s1), cap(s1), s1)    // 3 3 [1 2 3 ]
@@ -102,3 +110,4 @@ func main() {
 	fmt.Println(s1)        // [1 22 23]    // 此时的 s1 不再更新，为旧数据
 	fmt.Println(s2)        // [32 33 14]
 }
+ */
