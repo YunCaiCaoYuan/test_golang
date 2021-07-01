@@ -7,10 +7,19 @@ type ChannelRel struct {
 }
 
 func main() {
+	list := make([]int32, 1)
+	list = append(list, 100)
+	fmt.Println("list=", list)
+	fmt.Println("len(list)=", len(list), " cap(list)=", cap(list))
+	//list= [0 100]
+	//len(list)= 2  cap(list)= 2
+
+	/*
 	list := make([]int32, 7)
 	fmt.Println("len(list)=", len(list), " cap(list)=", cap(list))
 	list2 := make([]int32, 0, 7)
 	fmt.Println("len(list2)=", len(list2), " cap(list2)=", cap(list2))
+	 */
 }
 
 /*

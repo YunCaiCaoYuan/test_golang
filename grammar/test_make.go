@@ -32,7 +32,7 @@ func returnStructSlice() []*test {
 	fmt.Printf("list1=%p\n", list)
 	fmt.Println("list1=", list)
 	fmt.Printf("list1 =%p\n", &list[0])
-	fmt.Println("list1 0=", sh)
+	fmt.Printf("list1 0=%x\n\n", sh.Data)
 	return list
 }
 
