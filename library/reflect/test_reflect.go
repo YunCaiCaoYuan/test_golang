@@ -1,8 +1,121 @@
 package main
 
-import "fmt"
 import "reflect"
+import "fmt"
 
+type MyMath struct {
+	Pi float64
+}
+
+//普通函数
+func (myMath MyMath) Sum(a, b int) int {
+	return a + b
+}
+
+func (myMath MyMath) Dec(a, b int) int {
+	return a - b
+}
+
+func main() {
+	var myMath = MyMath{Pi:3.14159}
+	//获取myMath的值对象
+	rValue := reflect.ValueOf(myMath)
+	//获取到该结构体有多少个方法
+	//numOfMethod := rValue.NumMethod()
+	//构造函数参数，传入两个整形值
+	paramList := []reflect.Value{reflect.ValueOf(30), reflect.ValueOf(20)}
+
+	//调用结构体的第一个方法Method(0)
+	//注意:在反射值对象中方法索引的顺序并不是结构体方法定义的先后顺序
+	//而是根据方法的ASCII码值来从小到大排序，所以Dec排在第一个，也就是Method(0)
+	result := rValue.Method(0).Call(paramList)
+	fmt.Println(result[0].Int())
+
+	//	10
+}
+/*
+//普通函数
+func add(a, b int) int {
+	return a + b
+}
+func main() {
+	//将函数包装为反射值对象
+	funcValue := reflect.ValueOf(add)
+	//构造函数参数，传入两个整形值
+	paramList := []reflect.Value{reflect.ValueOf(2), reflect.ValueOf(3)}
+	//反射调用函数
+	retList := funcValue.Call(paramList)
+	fmt.Println(retList[0].Int())
+	// 5
+}
+ */
+
+/*
+func main() {
+	type dog struct {
+		LegCount int
+	}
+	//获取dog实例的反射值对象
+	valueOfDog := reflect.ValueOf(&dog{})
+	//// 取出dog实例地址的元素
+	valueOfDog = valueOfDog.Elem()
+	//获取legCount字段的值
+	vLegCount := valueOfDog.FieldByName("LegCount")
+	//尝试设置legCount的值
+	vLegCount.SetInt(4)
+	fmt.Println(vLegCount.Int())
+	// 4
+}
+ */
+
+/*
+func main() {
+	type dog struct {
+		legCount int
+	}
+	//获取dog实例的反射值对象
+	valueOfDog := reflect.ValueOf(&dog{})
+	valueOfDog = valueOfDog.Elem()
+	//获取legCount字段的值
+	vLegCount := valueOfDog.FieldByName("legCount")
+	//尝试设置legCount的值(这里会发生崩溃)
+	vLegCount.SetInt(4)
+
+//panic: reflect: reflect.flag.mustBeAssignable using value obtained using unexported field
+}
+ */
+
+/*
+func main() {
+	//声明整形变量a并赋初值
+	var a int = 1024
+	//获取变量a的反射值对象
+	rValue := reflect.ValueOf(&a)
+	//取出a地址的元素(a的值)
+	rValue = rValue.Elem()
+	//尝试将a修改为1
+	rValue.SetInt(1)
+	//打印a的值
+	fmt.Println(rValue.Int())
+
+	//1
+}
+ */
+
+/*
+func main() {
+	//声明整形变量a并赋初值
+	var a int = 1024
+	//获取变量a的反射值对象
+	rValue := reflect.ValueOf(a)
+	//尝试将a修改为1(此处会崩溃)
+	rValue.SetInt(1)
+
+	// panic: reflect: reflect.flag.mustBeAssignable using unaddressable value
+}
+ */
+
+/*
 func main() {
 	//*int的空指针
 	var a *int
@@ -30,6 +143,7 @@ func main() {
 	//不存在的键: false
 
 }
+ */
 
 /*
 //定义结构体
