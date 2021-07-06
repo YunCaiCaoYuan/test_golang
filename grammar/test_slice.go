@@ -7,12 +7,42 @@ type ChannelRel struct {
 }
 
 func main() {
+	slice := []int{10, 20, 30, 40}
+	for index, value := range slice {
+		fmt.Printf("value = %d , value-addr = %x , slice-addr = %x\n", value, &value, &slice[index])
+	}
+
+	/*
+	slice := make([]byte, 3)
+	n := copy(slice, "abcdef")
+	fmt.Println(n,slice)
+	 */
+
+	/*
+	array := []int{10, 20, 30, 40}
+	slice := make([]int, 6)
+	n := copy(slice, array)
+	fmt.Println(n,slice)
+	 */
+
+	/*
+	list := []int{3,1,4,15,9,2,6,5,31}
+	//slice := list[2:5:7] // [4 15 9]
+	slice := list[2:5] // [4 15 9]
+	//slice = append(slice, 123)
+	fmt.Println(slice)
+	fmt.Println(list)
+	fmt.Println(cap(slice))
+	 */
+
+	/*
 	list := make([]int32, 1)
 	list = append(list, 100)
 	fmt.Println("list=", list)
 	fmt.Println("len(list)=", len(list), " cap(list)=", cap(list))
 	//list= [0 100]
 	//len(list)= 2  cap(list)= 2
+	 */
 
 	/*
 	list := make([]int32, 7)
