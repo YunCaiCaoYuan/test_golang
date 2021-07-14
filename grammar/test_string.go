@@ -1,15 +1,15 @@
 package main
 
-import (
-	"fmt"
-	"strconv"
-)
+import "fmt"
 
 func main() {
+	fmt.Println(string("") == "1")
+	/*
 	rankStr := ""
 	num := 1
 	rankStr += strconv.Itoa(num)
 	fmt.Println(rankStr)
+	 */
 
 	/*
 	i := small(10)
