@@ -29,3 +29,5 @@ func main() {
 	}
 	fmt.Println("main exit.")
 }
+// default
+//main exit.

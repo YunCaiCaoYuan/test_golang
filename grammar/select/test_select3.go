@@ -25,3 +25,5 @@ func main() {
 
 	fmt.Println("main exit.")
 }
+// chan2 ready.
+//main exit.
