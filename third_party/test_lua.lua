@@ -204,14 +204,18 @@ redis.call('EXPIRE', KEYS[1], 7*24*3600)
 return dur_data_str
 ]]--
 
-local dur_data = redis.call('GET', KEYS[1])
-if dur_data then
-    dur_data = cjson.decode(dur_data)
-    if dur_data["duration"] then
-        return dur_data["duration"]
-    else
-        return 0
-    end
-else
-    return 0
-end
+--local dur_data = redis.call('GET', KEYS[1])
+--if dur_data then
+--    dur_data = cjson.decode(dur_data)
+--    if dur_data["duration"] then
+--        return dur_data["duration"]
+--    else
+--        return 0
+--    end
+--else
+--    return 0
+--end
+
+local a = "123"
+local b = a - "23"
+print(b)

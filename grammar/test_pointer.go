@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"time"
-	"unsafe"
 )
 
 type Nameplate struct {
@@ -23,14 +22,29 @@ func func1() *Nameplate {
 	return nil
 }
 
+func func2() *Nameplate {
+	return &Nameplate{}
+}
+
 func main() {
+	var res *Nameplate
+	fmt.Println("res1=", res)
+	res = func2()
+	fmt.Println("res2=", res)
+	res = func1()
+	fmt.Println("res3=", res)
+
+	/*
 	nameplate := new(Nameplate)
 	fmt.Println("nameplate1=", nameplate, "&nameplate", &nameplate)
 	nameplate = func1()
 	fmt.Println("nameplate2=", nameplate, "&nameplate", &nameplate)
 
-	fmt.Println("sizeof &nameplate=", unsafe.Sizeof(nameplate))
-	fmt.Println("sizeof *nameplate=", unsafe.Sizeof(*nameplate))
+	fmt.Println("sizeof &nameplate=", unsafe.Sizeof(nameplate))  // 8
+	fmt.Println("sizeof *nameplate=", unsafe.Sizeof(*nameplate)) // 88
 
 	fmt.Println("sizeof string=", unsafe.Sizeof(nameplate.Name)) // 16字节
+	fmt.Println("sizeof time.Time=", unsafe.Sizeof(nameplate.CreatedAt)) // 24字节
+	fmt.Println("sizeof empty struct", unsafe.Sizeof(struct {}{}))	// 0
+	 */
 }
