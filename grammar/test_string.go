@@ -1,25 +1,32 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
+	cell := "﻿问题" // BOM
+	ret := strings.Trim(cell, " ")
+	fmt.Println(ret)
+
 	fmt.Println(string("") == "1")
-	/*
-	rankStr := ""
-	num := 1
-	rankStr += strconv.Itoa(num)
-	fmt.Println(rankStr)
-	 */
 
 	/*
-	i := small(10)
-	println("i=", i)
-	 */
-
+		rankStr := ""
+		num := 1
+		rankStr += strconv.Itoa(num)
+		fmt.Println(rankStr)
+	*/
 
 	/*
-	ret := strings.Contains("新手宝宝注意查收一下", "100")
-	fmt.Println(ret)*/
+		i := small(10)
+		println("i=", i)
+	*/
+
+	/*
+		ret := strings.Contains("新手宝宝注意查收一下", "100")
+		fmt.Println(ret)*/
 	/*
 		str := " 123 "
 		ret := strings.TrimSpace(str)
@@ -27,6 +34,7 @@ func main() {
 	*/
 }
 
+/*
 const digits = "0123456789abcdefghijklmnopqrstuvwxyz"
 const smallsString = "00010203040506070809" +
 	"10111213141516171819" +
@@ -44,3 +52,4 @@ func small(i int) string {
 	}
 	return smallsString[i*2 : i*2+2]
 }
+*/
