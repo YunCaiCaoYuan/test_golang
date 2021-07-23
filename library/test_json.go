@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -15,6 +14,13 @@ func checkError(err error) {
 
 // 状态名称可能是 int 也可能是 string，指定为 json.RawMessage 类型
 func main() {
+	bin, _ := json.Marshal(1)
+	fmt.Println(bin)
+	ret := int32(0)
+	json.Unmarshal(bin, &ret)
+	fmt.Println(ret)
+
+	/*
 	records := [][]byte{
 		[]byte(`{"status":200, "tag":"one"}`),
 		[]byte(`{"status":"ok", "tag":"two"}`),
@@ -45,6 +51,7 @@ func main() {
 
 		fmt.Printf("[%v] result => %+v\n", idx, result)
 	}
+	 */
 }
 
 /*

@@ -216,6 +216,27 @@ return dur_data_str
 --    return 0
 --end
 
-local a = "123"
-local b = a - "23"
-print(b)
+--local a = "123"
+--local b = a - "23"
+--print(b)
+
+
+local key = KEYS[1]
+local expire_time = ARGV[1]
+for i=3, #ARGV, 2 do
+local score = tonumber(ARGV[i])
+local member = ARGV[i+1]
+redis.call("ZADD", key, score, member)
+end
+
+local gap_val = ARGV[2]
+
+if gap_val ~= '' then
+redis.call("ZREM", key, gap_val)
+end
+
+redis.call("expire", key, expire_time)
+redis.call('ZREMRANGEBYRANK', key, 300, -1)
+return 1
+
+-- redis-cli  --eval test_lua.lua  "community:MyYes:1000278" , 300 212 12312 11
