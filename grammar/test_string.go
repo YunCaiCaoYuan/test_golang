@@ -6,9 +6,11 @@ import (
 )
 
 func main() {
-	cell := "﻿问题" // BOM
+	cell := "你好" // BOM
 	ret := strings.Trim(cell, " ")
 	fmt.Println(ret)
+	fmt.Println("len 你好 = ", len(cell))
+	fmt.Println("len 123 = ", len("123"))
 
 	fmt.Println(string("") == "1")
 

@@ -3,6 +3,11 @@ package main
 import "fmt"
 
 func main() {
+	fmt.Println("0 / 10 =", 0 / 10 * 10)
+	fmt.Println("9 / 10 =", 9 / 10 * 10)
+	fmt.Println("12 / 10 =", 12 / 10 * 10)
+	fmt.Println("20 / 10 =", 20 / 10 * 10)
+
 	var intval int64
 	fmt.Println("intval=", intval)
 
