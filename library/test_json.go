@@ -14,11 +14,27 @@ func checkError(err error) {
 
 // 状态名称可能是 int 也可能是 string，指定为 json.RawMessage 类型
 func main() {
+	//data := "{\"content\":\"TA手滑拍了拍你的主页\",\"type\":1007}"
+	//data := "{\"content\":\"TA手滑拍了拍你的主页\"}"
+	data := "" // unexpected end of JSON input
+	//data := "{}"
+	type DataContent struct {
+		Type int32 `json:"type"`
+	}
+	var dataC DataContent
+	err := json.Unmarshal([]byte(data), &dataC)
+	if err != nil {
+		fmt.Println("err=", err)
+	}
+	fmt.Println(dataC)
+
+	/*
 	bin, _ := json.Marshal(1)
 	fmt.Println(bin)
 	ret := int32(0)
 	json.Unmarshal(bin, &ret)
 	fmt.Println(ret)
+	 */
 
 	/*
 	records := [][]byte{
