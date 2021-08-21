@@ -25,7 +25,7 @@ func twoCBall(rList, rList1 sort.IntSlice, blue, blue1 int) {
 
 		}
 	}
-	//fmt.Println("heartWaterMap=", heartWaterMap)
+	fmt.Println("heartWaterMap=", heartWaterMap)
 	fmt.Println("killRedMap1=", killRedMap1)
 
 	killRedMap2 := make(map[int]bool)
@@ -117,14 +117,12 @@ func calcDivSum(total int) int {
 
 func main() {
 	rList := [][]int{
-		{1, 2, 7, 13, 23, 24},
-		{5, 6, 12, 14, 27, 28},
-		{4, 6, 16, 24, 26, 33},
+		{5, 11, 15, 25, 28, 33},
+		{9, 11, 24, 25, 28, 33},
 	}
 	bList := []int{
-		12,
-		8,
-		16,
+		3,
+		15,
 	}
 	twoCBall(rList[0], rList[1], bList[0], bList[1])
 }
