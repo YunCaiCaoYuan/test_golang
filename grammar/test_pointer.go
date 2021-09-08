@@ -26,13 +26,33 @@ func func2() *Nameplate {
 	return &Nameplate{}
 }
 
+func func3() Nameplate {
+	ret := Nameplate{}
+	fmt.Printf("ret1 = %p\n", &ret)
+	return ret
+}
+
+func func4() *Nameplate {
+	ret := Nameplate{}
+	fmt.Printf("ret2 = %p\n", &ret)
+	return &ret
+}
+
 func main() {
+	ret := func3()
+	fmt.Printf("ret11 = %p\n", &ret)
+
+	ret1 := func4()
+	fmt.Printf("ret22 = %p\n", ret1)  // 传指针vs传值，传值会发生深拷贝
+
+	/*
 	var res *Nameplate
 	fmt.Println("res1=", res)
 	res = func2()
 	fmt.Println("res2=", res)
 	res = func1()
 	fmt.Println("res3=", res)
+	 */
 
 	/*
 	nameplate := new(Nameplate)
