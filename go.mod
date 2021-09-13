@@ -11,14 +11,14 @@ require (
 	github.com/go-redis/redis v6.15.9+incompatible
 	github.com/goburrow/cache v0.1.3
 	github.com/golang/protobuf v1.4.2
-	github.com/onsi/ginkgo v1.15.0 // indirect
-	github.com/onsi/gomega v1.10.5 // indirect
+	github.com/onsi/ginkgo v1.16.4
+	github.com/onsi/gomega v1.10.5
 	github.com/qiniu/py v0.0.0-20130529172247-8425e7e84b81
 	github.com/qiniu/x v1.11.5
 	github.com/satori/go.uuid v1.2.0 // indirect
 	github.com/sbinet/go-python v0.1.0
 	github.com/smartystreets/goconvey v1.6.4
-	github.com/stretchr/testify v1.4.0
+	github.com/stretchr/testify v1.5.1
 	github.com/vmihailenco/msgpack v3.3.3+incompatible
 	go.uber.org/zap v1.16.0
 	golang.org/x/net v0.0.0-20201202161906-c7110b5ffcbb
