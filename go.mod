@@ -17,8 +17,11 @@ require (
 	github.com/qiniu/x v1.11.5
 	github.com/satori/go.uuid v1.2.0 // indirect
 	github.com/sbinet/go-python v0.1.0
+	github.com/smartystreets/goconvey v1.6.4
+	github.com/stretchr/testify v1.4.0
 	github.com/vmihailenco/msgpack v3.3.3+incompatible
 	go.uber.org/zap v1.16.0
+	golang.org/x/net v0.0.0-20201202161906-c7110b5ffcbb
 	golang.org/x/sync v0.0.0-20201020160332-67f06af15bc9
 	golang.org/x/text v0.3.3
 	golang.org/x/time v0.0.0-20210220033141-f8bda1e9f3ba // indirect
