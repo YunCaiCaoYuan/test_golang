@@ -13,6 +13,7 @@ require (
 	github.com/golang/protobuf v1.4.2
 	github.com/onsi/ginkgo v1.16.4
 	github.com/onsi/gomega v1.10.5
+	github.com/prashantv/gostub v1.0.0
 	github.com/qiniu/py v0.0.0-20130529172247-8425e7e84b81
 	github.com/qiniu/x v1.11.5
 	github.com/satori/go.uuid v1.2.0 // indirect

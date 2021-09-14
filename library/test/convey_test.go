@@ -21,18 +21,18 @@ func StringSliceEqual(a, b []string) bool {
 	}
 	return true
 }
-
+/*
 func TestStringSliceEqual(t *testing.T) {
 	Convey("TestStringSliceEqual的描述", t, func() {
 		a := []string{"hello", "goconvey"}
 		b := []string{"hello", "goconvey"}
-		So(StringSliceEqual(a, b), ShouldBeTrue)
+		So(StringSliceEqual(a, b), ShouldBeFalse)
 	})
 }
 
-func TestStringSliceEqual2(t *testing.T) {
+func TestStringSliceEqual(t *testing.T) {
 	Convey("TestStringSliceEqual", t, func() {
-		
+
 		Convey("true when a != nil  && b != nil", func() {
 			a := []string{"hello", "goconvey"}
 			b := []string{"hello", "goconvey"}
@@ -41,6 +41,33 @@ func TestStringSliceEqual2(t *testing.T) {
 
 		Convey("true when a ＝= nil  && b ＝= nil", func() {
 			So(StringSliceEqual(nil, nil), ShouldBeTrue)
+		})
+	})
+}
+ */
+
+func TestStringSliceEqual(t *testing.T) {
+	Convey("TestStringSliceEqual", t, func() {
+		Convey("should return true when a != nil  && b != nil", func() {
+			a := []string{"hello", "goconvey"}
+			b := []string{"hello", "goconvey"}
+			So(StringSliceEqual(a, b), ShouldBeTrue)
+		})
+
+		Convey("should return true when a ＝= nil  && b ＝= nil", func() {
+			So(StringSliceEqual(nil, nil), ShouldBeTrue)
+		})
+
+		Convey("should return false when a ＝= nil  && b != nil", func() {
+			a := []string(nil)
+			b := []string{}
+			So(StringSliceEqual(a, b), ShouldBeFalse)
+		})
+
+		Convey("should return false when a != nil  && b != nil", func() {
+			a := []string{"hello", "world"}
+			b := []string{"hello", "goconvey"}
+			So(StringSliceEqual(a, b), ShouldBeFalse)
 		})
 	})
 }
