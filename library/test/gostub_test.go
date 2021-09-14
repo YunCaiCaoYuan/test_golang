@@ -19,10 +19,12 @@ func ExampleStubFunc() {
 }
 
 func ExampleStub() {
-	var counter = 100
+ 	var counter = 100
 
 	defer gostub.Stub(&counter, 200).Reset()
 	fmt.Println("Counter:", counter)
 	// Output:
 	// Counter: 200
 }
+
+

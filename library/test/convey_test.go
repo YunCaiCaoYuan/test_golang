@@ -1,6 +1,7 @@
 package test
 
 import (
+	. "github.com/prashantv/gostub"
 	. "github.com/smartystreets/goconvey/convey"
 	"testing"
 )
@@ -71,3 +72,41 @@ func TestStringSliceEqual(t *testing.T) {
 		})
 	})
 }
+
+/*
+func TestFuncDemo(t *testing.T) {
+	Convey("TestFuncDemo", t, func() {
+		Convey("for succ", func() {
+			stubs := Stub(&num, 150)
+			defer stubs.Reset()
+			stubs.StubFunc(&Exec,"xxx-vethName100-yyy", nil)
+			var liLei = `{"name":"LiLei", "age":"21"}`
+			stubs.StubFunc(&adapter.Marshal, []byte(liLei), nil)
+			stubs.StubFunc(&DestroyResource)
+			//several So assert
+		})
+
+		Convey("for fail when num is too small", func() {
+			stubs := Stub(&num, 50)
+			defer stubs.Reset()
+			//several So assert
+		})
+
+		Convey("for fail when Exec error", func() {
+			stubs := Stub(&num, 150)
+			defer stubs.Reset()
+			stubs.StubFunc(&Exec, "", ErrAny)
+			//several So assert
+		})
+
+		Convey("for fail when Marshal error", func() {
+			stubs := Stub(&num, 150)
+			defer stubs.Reset()
+			stubs.StubFunc(&Exec,"xxx-vethName100-yyy", nil)
+			stubs.StubFunc(&adapter.Marshal, nil, ErrAny)
+			//several So assert
+		})
+
+	})
+}
+ */
