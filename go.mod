@@ -2,17 +2,16 @@ module github.com/YunCaiCaoYuan/test_golang
 
 go 1.12
 
-require github.com/jinzhu/gorm v1.9.16
-
 require (
 	bou.ke/monkey v1.0.2
 	github.com/YunCaiCaoYuan/go-python3 v0.0.0-20210311031402-764ace0de754
+	github.com/agiledragon/gomonkey/v2 v2.2.0
 	github.com/aliyun/aliyun-oss-go-sdk v2.1.6+incompatible
 	github.com/baiyubin/aliyun-sts-go-sdk v0.0.0-20180326062324-cfa1a18b161f // indirect
 	github.com/go-redis/redis v6.15.9+incompatible
 	github.com/goburrow/cache v0.1.3
-	github.com/golang/mock v1.6.0 // indirect
 	github.com/golang/protobuf v1.4.2
+	github.com/jinzhu/gorm v1.9.16
 	github.com/onsi/ginkgo v1.16.4
 	github.com/onsi/gomega v1.10.5
 	github.com/prashantv/gostub v1.0.0
@@ -28,5 +27,6 @@ require (
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
 	golang.org/x/text v0.3.3
 	golang.org/x/time v0.0.0-20210220033141-f8bda1e9f3ba // indirect
+	golang.org/x/tools v0.1.1 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 )
