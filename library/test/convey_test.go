@@ -1,7 +1,7 @@
 package test
 
 import (
-	. "github.com/prashantv/gostub"
+	//. "github.com/prashantv/gostub"
 	. "github.com/smartystreets/goconvey/convey"
 	"testing"
 )
