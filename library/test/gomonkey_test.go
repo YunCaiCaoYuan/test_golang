@@ -1,11 +1,12 @@
 package test
 
 import (
+	"fmt"
 	. "github.com/agiledragon/gomonkey/v2"
 	"github.com/agiledragon/gomonkey/v2/test/fake"
 	. "github.com/smartystreets/goconvey/convey"
 	"reflect"
-	"testing"``
+	"testing"
 )
 
 func TestApplyMethodSeq(t *testing.T) {
@@ -13,9 +14,9 @@ func TestApplyMethodSeq(t *testing.T) {
 	Convey("TestApplyMethodSeq", t, func() {
 
 		Convey("default times is 1", func() {
-			info1 := "hello cpp"
-			info2 := "hello golang"
-			info3 := "hello gomonkey"
+			info1 := "Hello, Etcd!"
+			info2 := "Hello, Etcd!"
+			info3 := "Hello, Etcd!"
 			outputs := []OutputCell{
 				{Values: Params{info1, nil}},
 				{Values: Params{info2, nil}},
@@ -25,11 +26,14 @@ func TestApplyMethodSeq(t *testing.T) {
 			defer patches.Reset()
 			output, err := e.Retrieve("")
 			So(err, ShouldEqual, nil)
+			fmt.Printf("p1=%p\n", e.Retrieve)
 			So(output, ShouldEqual, info1)
 			output, err = e.Retrieve("")
+			fmt.Printf("p2=%p\n", e.Retrieve)
 			So(err, ShouldEqual, nil)
 			So(output, ShouldEqual, info2)
 			output, err = e.Retrieve("")
+			fmt.Printf("p3=%p\n", e.Retrieve)
 			So(err, ShouldEqual, nil)
 			So(output, ShouldEqual, info3)
 		})
