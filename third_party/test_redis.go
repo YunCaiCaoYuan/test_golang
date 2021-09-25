@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	//"git.2tianxin.com/platform/utils/uredis"
 	"github.com/go-redis/redis"
 	"log"
 	"strings"

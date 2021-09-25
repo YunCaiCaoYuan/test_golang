@@ -2,17 +2,8 @@ package integration_test
 
 import (
 	"context"
-	"git.2tianxin.com/platform/tars-go/tars/servant"
-	"git.2tianxin.com/platform/utils/goim/libs/define"
 	"strconv"
 	"time"
-	"yesserver/util/errors"
-	"yesserver/util/protocol/pb"
-	"yesserver/yes/channel/cache"
-	"yesserver/yes/channel/dao"
-	"yesserver/yes/channel/handler"
-	"yesserver/yes/channel/local"
-	"yesserver/yes/channel/model"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
