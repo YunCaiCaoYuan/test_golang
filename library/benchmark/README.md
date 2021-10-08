@@ -20,7 +20,7 @@
     -F         post body data文件 
     -H         http header
 ```
-详细使用参考[TarsBenchmark](https://github.com/TarsCloud/TarsBenchmark/blob/master/README.zh.md)
+详细使用参考[TarsBenchmark](https://github.com/TarsCloud/TarsDocs/tree/master/benchmark)
 
     
    

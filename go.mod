@@ -20,6 +20,7 @@ require (
 	github.com/satori/go.uuid v1.2.0 // indirect
 	github.com/sbinet/go-python v0.1.0
 	github.com/smartystreets/goconvey v1.6.4
+	github.com/stackimpact/stackimpact-go v2.3.10+incompatible // indirect
 	github.com/stretchr/testify v1.5.1
 	github.com/vmihailenco/msgpack v3.3.3+incompatible
 	go.uber.org/zap v1.16.0
