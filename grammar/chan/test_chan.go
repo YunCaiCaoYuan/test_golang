@@ -12,7 +12,16 @@ func say(s string) {
 	}
 }
 
+type EventData struct {
+	Event int
+	Data int
+}
+
 func main() {
+	myChan := make(chan EventData)
+
+	/*
 	go say("world")
 	say("hello")
+	 */
 }
