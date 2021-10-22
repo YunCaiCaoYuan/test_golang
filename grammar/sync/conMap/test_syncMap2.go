@@ -1,4 +1,4 @@
-package main
+package conMap
 
 import (
 	"fmt"
@@ -8,33 +8,40 @@ import (
 
 type ConcurrentMap struct {
 	m         sync.Map
-	keyType   reflect.Type
-	valueType reflect.Type
+	KeyType   reflect.Type
+	ValueType reflect.Type
 }
 
 func (cMap *ConcurrentMap) Load(key interface{}) (value interface{}, ok bool) {
-	if reflect.TypeOf(key) != cMap.keyType {
+	if reflect.TypeOf(key) != cMap.KeyType {
 		return
 	}
 	return cMap.m.Load(key)
 }
 
 func (cMap *ConcurrentMap) Store(key, value interface{}) {
-	if reflect.TypeOf(key) != cMap.keyType {
+	if reflect.TypeOf(key) != cMap.KeyType {
 		fmt.Printf("wrong key type: %v", reflect.TypeOf(key))
 		return
 	}
-	if reflect.TypeOf(value) != cMap.valueType {
+	if reflect.TypeOf(value) != cMap.ValueType {
 		fmt.Printf("wrong value type: %v", reflect.TypeOf(value))
 		return
 	}
 	cMap.m.Store(key, value)
 }
 
+func (cMap *ConcurrentMap) Delete(key interface{}) {
+	if reflect.TypeOf(key) != cMap.KeyType {
+		return
+	}
+	cMap.m.Delete(key)
+}
+
 func main() {
 	var cMap = ConcurrentMap{
-		keyType: reflect.TypeOf(int32(123)),
-		valueType: reflect.TypeOf("123"),
+		KeyType: reflect.TypeOf(int32(123)),
+		ValueType: reflect.TypeOf("123"),
 	}
 	val, ok := cMap.Load(123)
 	if ok {
