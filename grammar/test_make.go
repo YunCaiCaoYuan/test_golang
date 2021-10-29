@@ -36,11 +36,30 @@ func returnStructSlice() []*test {
 	return list
 }
 
+type intObj struct {
+	room map[string]*test
+}
+
+func NewIntObj() *intObj {
+	obj := new(intObj)
+	obj.room = make(map[string]*test)
+	return obj
+}
+
 func main() {
+	// struct 里面的 map 是否需要 显式分配内存
+	// 需要，否则报：panic: assignment to entry in nil map
+	obj := NewIntObj()
+	obj.room["123"] = &test{Count: 123, Price: 123}
+	fmt.Println(obj)
+
+
+	/*
 	list := returnStructSlice() // 上层结构浅拷贝，底层地址不变
 	fmt.Printf("list2=%p\n", &list)
 	fmt.Println("list2=", list)
 	fmt.Printf("list2=%p\n", &list[0])
+	 */
 	//list1=0xc00000c0a0
 	//list1= [0xc00001a090 0xc00001a0a0]
 	//list2=0xc00000c080
