@@ -28,17 +28,20 @@ func func2() *Nameplate {
 
 func func3() Nameplate {
 	ret := Nameplate{}
-	fmt.Printf("ret1 = %p\n", &ret)
+	fmt.Printf("ret10 = %p\n", &ret)
 	return ret
 }
 
 func func4() *Nameplate {
 	ret := Nameplate{}
-	fmt.Printf("ret2 = %p\n", &ret)
+	fmt.Printf("ret20 = %p\n", &ret)
 	return &ret
 }
 
 func main() {
+	res := func2()
+	fmt.Println("res2=", res)
+
 	ret := func3()
 	fmt.Printf("ret11 = %p\n", &ret)
 
@@ -48,8 +51,7 @@ func main() {
 	/*
 	var res *Nameplate
 	fmt.Println("res1=", res)
-	res = func2()
-	fmt.Println("res2=", res)
+
 	res = func1()
 	fmt.Println("res3=", res)
 	 */
