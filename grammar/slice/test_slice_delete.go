@@ -3,13 +3,14 @@ package main
 import "fmt"
 
 func main() {
-	list := make([]int, 0, 10)
-	for i:=1; i<=10; i++{
+	sliceLen := 1
+	list := make([]int, 0, sliceLen)
+	for i:=1; i<=sliceLen; i++{
 		list = append(list, i)
 	}
 	fmt.Println("before del list:", list, "len:", len(list), "cap:", cap(list))
 
-	delVal := 4
+	delVal := 1
 	delIdx := -1
 	for idx, val := range list {
 		if delVal == val {

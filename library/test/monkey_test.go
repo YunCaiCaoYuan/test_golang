@@ -2,11 +2,13 @@ package test
 
 import (
 	. "bou.ke/monkey"
+	"fmt"
 	. "github.com/smartystreets/goconvey/convey"
 	"testing"
 )
 
 func IsEqual(a, b string) bool {
+	fmt.Println("not monkey")
 	return a == b
 }
 
@@ -14,6 +16,7 @@ func TestIsEqual(t *testing.T) {
 	Convey("test is equal", t, func() {
 		Convey("for patch true", func() {
 			guard := Patch(IsEqual, func(_, _ string) bool {
+				fmt.Println("monkey...")
 				return true
 			})
 			defer guard.Unpatch()
