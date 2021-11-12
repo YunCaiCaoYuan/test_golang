@@ -1,5 +1,6 @@
 package main
 
+import "fmt"
 
 type StartGameReq struct {
 	Players []*GamePlayer `protobuf:"bytes,1,rep,name=players" json:"players,omitempty"`
@@ -19,5 +20,36 @@ type GSexType int32
 
 
 func main() {
+	var req StartGameReq
+	list1 := make([]*GamePlayer, 0, 20)
+	for i:=1;  i<= 10; i++ {
+		list1 = append(list1, &GamePlayer{Id: int64(i), IsRobot: false})
+	}
 
+	for i:=11;  i< 20; i++ {
+		list1 = append(list1, &GamePlayer{Id: int64(i), IsRobot: true})
+	}
+	req.Players = list1
+	fmt.Println("before:")
+	for _, tmp := range req.Players {
+		fmt.Println(tmp)
+	}
+
+	robotNum := 0
+	total := len(req.Players)
+	for i:=0; i<total; i++ {
+		if req.Players[i].IsRobot {
+			robotNum++
+		}
+	}
+
+	for i:=0; i<robotNum/2; i++ {
+		tmpPlayer := req.Players[i]
+		req.Players[i] = req.Players[total-i-1]
+		req.Players[total-i-1] = tmpPlayer
+	}
+	fmt.Println("after :")
+	for _, tmp := range req.Players {
+		fmt.Println(tmp)
+	}
 }
