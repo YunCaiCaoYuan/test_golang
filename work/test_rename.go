@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
-	"os"
+	"os"te
 )
 
 func main()  {
