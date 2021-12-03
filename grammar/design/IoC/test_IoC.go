@@ -7,7 +7,6 @@ import (
 
 // ============ example 4 : 反转控制 ============
 
-
 // 控制逻辑
 type Undo []func()
 
@@ -72,7 +71,6 @@ func main() {
 	obj.Undo()
 	fmt.Println("obj.data2:", obj.data)
 }
-
 
 // ============ example 4 ============
 /*
@@ -173,7 +171,6 @@ func main() {
 }
 */
 
-
 // ============ example 2 : 方法重写 ============
 /*
 type Widget struct {
@@ -251,7 +248,6 @@ func main() {
 		fmt.Println() // print a empty line
 	}
 }*/
-
 
 /* ============ example 1 : 结构体嵌入（委托） ============
 type Widget struct {
