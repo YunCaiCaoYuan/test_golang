@@ -1,4 +1,4 @@
-module github.com/YunCaiCaoYuan/test_golang
+module test_golang
 
 go 1.12
 
