@@ -1,10 +1,24 @@
 package main
 
-import (
-	"fmt"
-	"sync"
-)
+import "fmt"
 
+func main() {
+	inputOpt := make(map[string]string)
+	if len(inputOpt["region"]) != 0 {
+		fmt.Println("region not empty!")
+	} else {
+		fmt.Println("region empty!")
+	}
+
+	switch inputOpt["region"] {
+	case "Tmp":
+		fmt.Println("Tmp")
+	default:
+		fmt.Println("default")
+	}
+}
+
+/*
 // fatal error: concurrent map writes
 
 func main() {
@@ -27,3 +41,4 @@ func main() {
 	wg.Wait()
 	fmt.Println("finish...")
 }
+*/
