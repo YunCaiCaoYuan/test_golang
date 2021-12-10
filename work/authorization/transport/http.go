@@ -106,7 +106,6 @@ func decodeTokenRequest(ctx context.Context, r *http.Request) (interface{}, erro
 		GrantType: grantType,
 		Reader:    r,
 	}, nil
-
 }
 
 func decodeCheckTokenRequest(ctx context.Context, r *http.Request) (interface{}, error) {

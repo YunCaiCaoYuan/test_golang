@@ -1,5 +1,24 @@
 package main
 
+// ======================= 授权服务器 =======================
+//+--------+                               +---------------+
+//|        |--(1)- Authorization Request ->|   Resource    |
+//|        |                               |     Owner     |
+//|        |<-(2)-- Authorization Grant ---|               |
+//|        |                               +---------------+
+//|        |
+//|        |                               +---------------+
+//|        |--(3)-- Authorization Grant -->| Authorization |
+//| Client |                               |     Server    |
+//|        |<-(4)----- Access Token -------|               |
+//|        |                               +---------------+
+//|        |
+//|        |                               +---------------+
+//|        |--(5)----- Access Token ------>|    Resource   |
+//|        |                               |     Server    |
+//|        |<-(6)--- Protected Resource ---|               |
+//+--------+                               +---------------+
+
 import (
 	"authorization/config"
 	"authorization/endpoint"
