@@ -10,3 +10,4 @@ profile*
 *.pprof
 test_pprof2
 default
+node_modules
