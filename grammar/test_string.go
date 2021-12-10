@@ -6,13 +6,19 @@ import (
 )
 
 func main() {
-	cell := "你好" // BOM
-	ret := strings.Trim(cell, " ")
-	fmt.Println(ret)
-	fmt.Println("len 你好 = ", len(cell))
-	fmt.Println("len 123 = ", len("123"))
+	obj := "asd.qwe.123"
+	objList := strings.Split(obj, ".")
+	fmt.Println(objList)
 
-	fmt.Println(string("") == "1")
+	/*
+		cell := "你好" // BOM
+		ret := strings.Trim(cell, " ")
+		fmt.Println(ret)
+		fmt.Println("len 你好 = ", len(cell))
+		fmt.Println("len 123 = ", len("123"))
+
+		fmt.Println(string("") == "1")
+	*/
 
 	/*
 		rankStr := ""
