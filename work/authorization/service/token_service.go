@@ -179,6 +179,7 @@ func (tokenService *DefaultTokenService) CreateAccessToken(oauth2Details *model.
 	}
 
 	if refreshToken == nil || refreshToken.IsExpired() {
+		// 生成刷新令牌
 		refreshToken, err = tokenService.createRefreshToken(oauth2Details)
 		if err != nil {
 			return nil, err
