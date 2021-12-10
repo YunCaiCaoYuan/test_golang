@@ -11,3 +11,4 @@ profile*
 test_pprof2
 default
 node_modules
+package-lock.json

@@ -49,3 +49,10 @@ app.use(main);
 app.use(route.get('/oauth/redirect', oauth));
 
 app.listen(8080);
+
+/*
+network:
+  authorize?client_id=6c65fb543a41105cf9c9&redirect_uri=http://localhost:8080/oauth/redirect
+  redirect?code=e0158398833a058f3596
+  welcome.html?name=sunBin
+ */
