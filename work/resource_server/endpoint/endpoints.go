@@ -32,6 +32,8 @@ func MakeOAuth2AuthorizationMiddleware(logger log.Logger) endpoint.Middleware {
 		}
 	}
 }
+
+// MakeAuthorityAuthorizationMiddleware 鉴权
 func MakeAuthorityAuthorizationMiddleware(authority string, logger log.Logger) endpoint.Middleware {
 	return func(next endpoint.Endpoint) endpoint.Endpoint {
 
