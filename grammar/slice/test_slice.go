@@ -6,10 +6,22 @@ type ChannelRel struct {
 	ID int64 `json:"id,omitempty" gorm:"column:id"` // 自增 id
 }
 
+type testIntSlice struct {
+	intSlice []int
+}
+
 func main() {
+	//var intSlice []int
+	//intSlice := make([]int, 0)
+	var tis testIntSlice
+	tis.intSlice = append(tis.intSlice, 1)
+	fmt.Println(tis.intSlice)
+
+	/*
 	slice := []int{1,2,3}
 	fmt.Println(slice[:])
 	fmt.Println(slice)
+	 */
 
 	/*
 	slice := []int{10, 20, 30, 40}
