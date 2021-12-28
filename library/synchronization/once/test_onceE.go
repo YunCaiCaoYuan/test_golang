@@ -17,8 +17,7 @@ type Once struct {
 // 如果执行过则返回true
 // 如果没有执行过或者正在执行，返回false
 func (o *Once) Done() bool {
-	// fixme：这里要加上done的偏移
-	return atomic.LoadUint32((*uint32)(unsafe.Pointer(&o.Once))) == 1
+	return atomic.LoadUint32((*uint32)(unsafe.Pointer(uintptr(unsafe.Pointer(&o.Once)) + uintptr(8)))) == 1
 }
 
 func main() {
