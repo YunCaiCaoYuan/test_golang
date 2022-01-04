@@ -2,13 +2,31 @@ package main
 
 import (
 	"fmt"
-	"strings"
+	"unicode/utf8"
 )
 
 func main() {
+	obj1 := "你好"
+	fmt.Println("obj1:", obj1, "len(obj1):", len(obj1), "len([]byte(obj1)):", len([]byte(obj1)), "utf8.RuneCountInString:", utf8.RuneCountInString(obj1))
+
+	obj1 = "nihao"
+	fmt.Println("obj1:", obj1, "len(obj1):", len(obj1), "len([]byte(obj1)):", len([]byte(obj1)), "utf8.RuneCountInString:", utf8.RuneCountInString(obj1))
+
+	obj1 = "สบายดีไหม"
+	fmt.Println("obj1:", obj1, "len(obj1):", len(obj1), "len([]byte(obj1)):", len([]byte(obj1)), "utf8.RuneCountInString:", utf8.RuneCountInString(obj1))
+
+	obj1 = "Selamat datang!"
+	fmt.Println("obj1:", obj1, "len(obj1):", len(obj1), "len([]byte(obj1)):", len([]byte(obj1)), "utf8.RuneCountInString:", utf8.RuneCountInString(obj1))
+
+	obj1 = "Hoan nghênh"
+	fmt.Println("obj1:", obj1, "len(obj1):", len(obj1), "len([]byte(obj1)):", len([]byte(obj1)), "utf8.RuneCountInString:", utf8.RuneCountInString(obj1))
+
+
+	/*
 	obj := "asd.qwe.123"
 	objList := strings.Split(obj, ".")
 	fmt.Println(objList)
+	*/
 
 	/*
 		cell := "你好" // BOM
