@@ -32,3 +32,5 @@ go 1.12
 //golang.org/x/time v0.0.0-20210220033141-f8bda1e9f3ba // indirect
 //golang.org/x/tools v0.1.1 // indirect
 //require google.golang.org/appengine v1.6.7 // indirect
+
+require github.com/google/uuid v1.3.0 // indirect
