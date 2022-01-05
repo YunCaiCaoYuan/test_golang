@@ -82,7 +82,8 @@ func main() {
 	lkQ.Enqueue("1")
 	lkQ.Enqueue("2")
 	lkQ.Enqueue("3")
-	fmt.Println(lkQ.Dequeue())
-	fmt.Println(lkQ.Dequeue())
-	fmt.Println(lkQ.Dequeue())
+
+	for n:=0; n<1000; n++ {
+		fmt.Println(lkQ.Dequeue())
+	}
 }
