@@ -33,4 +33,37 @@ go 1.12
 //golang.org/x/tools v0.1.1 // indirect
 //require google.golang.org/appengine v1.6.7 // indirect
 
-require github.com/google/uuid v1.3.0 // indirect
+require (
+	bou.ke/monkey v1.0.2
+	github.com/YunCaiCaoYuan/go-python3 v0.0.0-20210311092900-6e5efe112bb7
+	github.com/agiledragon/gomonkey/v2 v2.4.0
+	github.com/aliyun/aliyun-oss-go-sdk v2.2.0+incompatible
+	github.com/baiyubin/aliyun-sts-go-sdk v0.0.0-20180326062324-cfa1a18b161f // indirect
+	github.com/go-gomail/gomail v0.0.0-20160411212932-81ebce5c23df
+	github.com/go-redis/redis v6.15.9+incompatible
+	github.com/goburrow/cache v0.1.4
+	github.com/golang/protobuf v1.5.2
+	github.com/google/uuid v1.3.0
+	github.com/jinzhu/gorm v1.9.16
+	github.com/matcornic/hermes/v2 v2.1.0
+	github.com/onsi/ginkgo v1.16.5
+	github.com/onsi/gomega v1.17.0
+	github.com/prashantv/gostub v1.1.0
+	github.com/qiniu/py v0.0.0-20211118064223-3c1b19f9bcd0
+	github.com/qiniu/x v1.11.5
+	github.com/rabbitmq/amqp091-go v1.2.0
+	github.com/satori/go.uuid v1.2.0 // indirect
+	github.com/sbinet/go-python v0.1.0
+	github.com/smartystreets/goconvey v1.7.2
+	github.com/stretchr/testify v1.7.0
+	github.com/vmihailenco/msgpack v3.3.3+incompatible
+	go.uber.org/zap v1.20.0
+	golang.org/x/crypto v0.0.0-20211215153901-e495a2d5b3d3
+	golang.org/x/net v0.0.0-20211216030914-fe4d6282115f
+	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
+	golang.org/x/text v0.3.7
+	golang.org/x/time v0.0.0-20211116232009-f0f3c7e86c11 // indirect
+	google.golang.org/appengine v1.6.7 // indirect
+	gopkg.in/alexcesaro/quotedprintable.v3 v3.0.0-20150716171945-2caba252f4dc // indirect
+	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df // indirect
+)
