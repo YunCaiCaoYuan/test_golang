@@ -1,11 +1,57 @@
 package main
 
-import (
-	"fmt"
-	"unicode/utf8"
-)
+import "fmt"
+
+type student struct {
+	id	int
+	name string
+}
+
+type pbStu struct {
+	id int
+	name string
+}
 
 func main() {
+	achiList := []*student{{1, "1"}, {2, "2"}}
+
+	achiLangList := make([]*student, 0, len(achiList))
+	for _, achi := range achiList {
+		achiLang := *achi // 深拷贝
+		achiLang.name = "111"
+
+		fmt.Println("achi:", achi, "achiLang:", achiLang)
+		achiLangList = append(achiLangList, &achiLang)
+	}
+	fmt.Println("achiList:")
+	for _,v := range achiList {
+		fmt.Println(v)
+
+	}
+	fmt.Println("achiLangList:")
+	for _,v := range achiLangList {
+		fmt.Println(v)
+	}
+
+
+	/*
+	s1 := "hello"
+	s2 := s1
+	s2 = "world"
+	fmt.Println(s1)
+	fmt.Println(s2)
+	//hello
+	//world
+
+	var stu1 = &student{id: 1, name: "123"}
+	var pbStu1 = &pbStu{stu1.id, stu1.name}
+	pbStu1.name = "456"
+
+	fmt.Println("stu1:", stu1)
+	fmt.Println("pbStu1:", pbStu1)
+	*/
+
+	/*
 	obj1 := "你好"
 	fmt.Println("obj1:", obj1, "len(obj1):", len(obj1), "len([]byte(obj1)):", len([]byte(obj1)), "utf8.RuneCountInString:", utf8.RuneCountInString(obj1))
 
@@ -20,7 +66,7 @@ func main() {
 
 	obj1 = "Hoan nghênh"
 	fmt.Println("obj1:", obj1, "len(obj1):", len(obj1), "len([]byte(obj1)):", len([]byte(obj1)), "utf8.RuneCountInString:", utf8.RuneCountInString(obj1))
-
+	*/
 
 	/*
 	obj := "asd.qwe.123"
