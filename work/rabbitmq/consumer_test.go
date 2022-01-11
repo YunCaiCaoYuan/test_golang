@@ -11,11 +11,11 @@ func TestDirectConsumer(t *testing.T) {
 	//log.InitAppLog()
 
 	config := &RabbitMqConfig{
-		Host: "192.168.33.10",
+		Host: "120.79.70.137",
 		Port: 5672,
-		Username: "guest",
-		Password: "guest",
-		Vhost: "/test",
+		Username: "sunbin",
+		Password: "sunbin",
+		Vhost: "/",
 	}
 
 	m, err := New(GetMqUrl(config)).Open()
@@ -58,9 +58,9 @@ func TestDirectConsumer(t *testing.T) {
 	i := 0
 	for msg := range msgC {
 		i++
-		if i%5 == 0 {
-			c.CloseChan() // 取样关闭连接，测试是否会自动recover
-		}
+		//if i%5 == 0 {
+		//	c.CloseChan() // 取样关闭连接，测试是否会自动recover
+		//}
 		// fmt.Println(msg)
 		fmt.Printf("Tag(%d) Body: %s\n", msg.DeliveryTag, string(msg.Body))
 		msg.Ack(true)

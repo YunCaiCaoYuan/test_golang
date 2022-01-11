@@ -12,8 +12,21 @@ func checkError(err error) {
 	}
 }
 
-// 状态名称可能是 int 也可能是 string，指定为 json.RawMessage 类型
 func main() {
+	iconMap := make(map[int]string)
+	iconMap[1]="1"
+	iconMap[2]="2"
+	iconMapMarshal, err := json.Marshal(&iconMap)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	iconMapRet := make(map[int]string)
+	json.Unmarshal(iconMapMarshal, &iconMapRet)
+	fmt.Println(iconMapRet)
+
+	// 状态名称可能是 int 也可能是 string，指定为 json.RawMessage 类型
+	/*
 	//data := "{\"content\":\"TA手滑拍了拍你的主页\",\"type\":1007}"
 	//data := "{\"content\":\"TA手滑拍了拍你的主页\"}"
 	data := "" // unexpected end of JSON input
@@ -27,6 +40,7 @@ func main() {
 		fmt.Println("err=", err)
 	}
 	fmt.Println(dataC)
+	 */
 
 	/*
 	bin, _ := json.Marshal(1)
