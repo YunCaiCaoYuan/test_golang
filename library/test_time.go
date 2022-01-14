@@ -1,3 +1,4 @@
+
 package main
 
 import "time"
@@ -26,9 +27,19 @@ func GetChanStarUpgradeCycle(t time.Time) (begin time.Time, statisticEnd time.Ti
 }
 
 func main() {
+	birth := "2010-01-01"
+	tim, err := time.Parse("2006-01-02", birth)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(tim)
+
+
+	/*
 	dur := time.Duration(-1) // 0
 	ret := int64(dur / time.Second)
 	fmt.Println("ret=", ret) // 0
+	 */
 
 	/*
 	now := time.Now()
