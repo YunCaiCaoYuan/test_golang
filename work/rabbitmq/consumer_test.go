@@ -2,9 +2,8 @@ package rabbitmq
 
 import (
 	"fmt"
-	"time"
 	"testing"
-
+	"time"
 )
 
 func TestDirectConsumer(t *testing.T) {

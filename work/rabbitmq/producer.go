@@ -186,13 +186,12 @@ func (p *Producer) Publish(exchange, routeKey string, msg *PublishMsg) error {
 	// confirm模式
 	// 这里加锁保证消息发送顺序与接收ack的channel的编号一致
 	p.publishMutex.Lock()
+	defer p.publishMutex.Unlock()
 	if err := p.ch.Publish(exchange, routeKey, false, false, pub); err != nil {
-		p.publishMutex.Unlock()
 		return fmt.Errorf("MQ: Producer publish failed, %v", err)
 	}
 	ch := p.chPool.Get().(chan bool)
 	p.confirm.Listen(ch)
-	p.publishMutex.Unlock()
 
 	ack, ok := <-ch
 	p.chPool.Put(ch)
