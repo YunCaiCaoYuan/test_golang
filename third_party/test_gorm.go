@@ -5,8 +5,8 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
-	"github.com/qiniu/x/log"
-	"go.uber.org/zap"
+	//"github.com/qiniu/x/log"
+	//"go.uber.org/zap"
 	"time"
 )
 
@@ -34,8 +34,8 @@ type Player struct {
 	Charm       int64      `gorm:"column:Charm"`
 	Wealth      int64      `gorm:"column:Wealth"`
 	Flags       int64      `gorm:"column:Flags"`
-	Flags2      int64      `gorm:"column:Flags2"`
-	Flags3      int64      `gorm:"column:Flags3"`
+	//Flags2      int64      `gorm:"column:Flags2"`
+	//Flags3      int64      `gorm:"column:Flags3"`
 	Icon        string     `gorm:"column:Icon"`
 	OnlineExp   uint32     `gorm:"column:OnlineExp"`
 	ClanId      int32      `gorm:"column:ClanId"`
@@ -77,6 +77,16 @@ func main() {
 		fmt.Println("err=", err)
 	}
 
+	// Save 未设置id
+	obj := Player{Nickname: "sunbin", CreateAt: time.Now()}
+	fmt.Println("obj1:", obj)
+	db.Save(obj)
+	fmt.Println("obj2:", obj)
+//obj1: {0 0 sunbin 0 0 0 0  0 0 2022-01-19 11:48:03.199191 +0800 CST m=+0.003374795 0    0 false 0}
+//obj2: {0 0 sunbin 0 0 0 0  0 0 2022-01-19 11:48:03.199191 +0800 CST m=+0.003374795 0    0 false 0}
+
+
+	/*
 	//type countStruct struct {
 	//	Point int32 	`gorm:"column:Point"`
 	//}
@@ -90,6 +100,7 @@ func main() {
 		log.Error("select fail", zap.Any("err", err))
 	}
 	fmt.Println("point=", countVar)
+	 */
 
 	/*
 	// Pluck
