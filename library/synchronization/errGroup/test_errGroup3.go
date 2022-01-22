@@ -18,6 +18,7 @@ func main() {
 		log.Fatal(err)
 	}
 
+	fmt.Println("len m:", len(m))
 	for k, sum := range m {
 		fmt.Printf("%s:\t%x\n", k, sum)
 	}
@@ -30,7 +31,7 @@ type result struct {
 
 // 遍历根目录下所有的文件和子文件夹,计算它们的md5的值.
 func MD5All(ctx context.Context, root string) (map[string][md5.Size]byte, error) {
-	g, ctx := errgroup.WithContext(ctx)
+	g, _ := errgroup.WithContext(ctx)
 	paths := make(chan string) // 文件路径channel
 
 	g.Go(func() error {
@@ -38,6 +39,8 @@ func MD5All(ctx context.Context, root string) (map[string][md5.Size]byte, error)
 		return filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
 
 			//...... //将文件路径放入到paths
+			//fmt.Println(path)
+			paths <- path
 			return nil
 		})
 	})
@@ -48,8 +51,10 @@ func MD5All(ctx context.Context, root string) (map[string][md5.Size]byte, error)
 	for i := 0; i < numDigesters; i++ {
 		g.Go(func() error {
 			for path := range paths { // 遍历直到paths chan被关闭
-				fmt.Printf(path)
+
 				//	...... // 计算path的md5值，放入到c中
+				//fmt.Println(path)
+				c <- result{path: path, sum: md5.Sum([]byte(path))}
 			}
 			return nil
 		})
@@ -68,5 +73,6 @@ func MD5All(ctx context.Context, root string) (map[string][md5.Size]byte, error)
 	if err := g.Wait(); err != nil {
 		return nil, err
 	}
+
 	return m, nil
 }
