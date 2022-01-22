@@ -2,7 +2,7 @@
 <project version="4">
   <component name="RemoteTargetsManager">
     <targets>
-      <target name="WSL - Ubuntu" type="wsl">
+      <target name="WSL - Ubuntu" type="wsl" uuid="06f6b33a-8158-4a87-bbee-f00235ccdc7f">
         <config>
           <option name="distributionMsId" value="Ubuntu" />
           <option name="projectRootOnTarget" value="/mnt/c/Program Files/JetBrains/GoLand 2021.2/jbr/bin&#10;/test_golang" />
@@ -12,6 +12,20 @@
             <option name="goPath" value="/home/sunbin/go" />
             <option name="goRoot" value="/home/sunbin/download/go/bin/go" />
             <option name="goVersion" value="go1.12.17 linux/amd64" />
+          </config>
+        </ContributedStateBase>
+      </target>
+      <target name="root@120.79.70.137:22" type="ssh/sftp" uuid="f4d88ebc-6ec1-4eb3-9d51-6d9ea9ae922d">
+        <config>
+          <option name="projectRootOnTarget" value="/root/test_golang" />
+          <option name="serverName" value="root@120.79.70.137:22 agent" />
+          <option name="useRsync" value="true" />
+        </config>
+        <ContributedStateBase type="GoLanguageRuntime">
+          <config>
+            <option name="goPath" value="/root/go" />
+            <option name="goRoot" value="/usr/bin/go" />
+            <option name="goVersion" value="go1.15.14 linux/amd64" />
           </config>
         </ContributedStateBase>
       </target>
