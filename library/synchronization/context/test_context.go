@@ -16,7 +16,7 @@ func main() {
 
 		for {
 			select {
-			case <-ctx.Done():
+			case <-ctx.Done(): //fixme :协程执行结束
 				fmt.Println("ctx.Done()")
 				return
 			default:
