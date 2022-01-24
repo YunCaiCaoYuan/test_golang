@@ -27,6 +27,7 @@ require (
 	github.com/modern-go/reflect2 v1.0.1 // indirect
 	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/gomega v1.18.0
+	github.com/pieterclaerhout/go-waitgroup v1.0.7
 	github.com/prashantv/gostub v1.1.0
 	github.com/qiniu/py v0.0.0-20211118064223-3c1b19f9bcd0
 	github.com/qiniu/x v1.11.5
