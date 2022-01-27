@@ -2,12 +2,16 @@ module test_golang
 
 go 1.12
 
+//github.com/coreos/bbolt => go.etcd.io/bbolt v1.3.5
+replace google.golang.org/grpc => google.golang.org/grpc v1.26.0
+
 require (
 	bou.ke/monkey v1.0.2
 	github.com/YunCaiCaoYuan/go-python3 v0.0.0-20210311092900-6e5efe112bb7
 	github.com/agiledragon/gomonkey/v2 v2.4.0
 	github.com/aliyun/aliyun-oss-go-sdk v2.2.0+incompatible
 	github.com/baiyubin/aliyun-sts-go-sdk v0.0.0-20180326062324-cfa1a18b161f // indirect
+	github.com/coreos/etcd v3.3.10+incompatible
 	github.com/facebookgo/ensure v0.0.0-20200202191622-63f1cf65ac4c // indirect
 	github.com/facebookgo/errgroup v0.0.0-20160209021148-779c8d7ef069
 	github.com/facebookgo/stack v0.0.0-20160209184415-751773369052 // indirect
@@ -42,6 +46,7 @@ require (
 	golang.org/x/net v0.0.0-20220121210141-e204ce36a2ba
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
 	golang.org/x/text v0.3.7
+	google.golang.org/grpc/examples v0.0.0-20220125225548-e27717498dbc // indirect
 	gopkg.in/alexcesaro/quotedprintable.v3 v3.0.0-20150716171945-2caba252f4dc // indirect
 	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df // indirect
 )
