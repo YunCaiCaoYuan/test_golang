@@ -3,7 +3,7 @@ module test_golang
 go 1.12
 
 //github.com/coreos/bbolt => go.etcd.io/bbolt v1.3.5
-replace google.golang.org/grpc => google.golang.org/grpc v1.26.0
+//replace google.golang.org/grpc => google.golang.org/grpc v1.26.0
 
 require (
 	bou.ke/monkey v1.0.2

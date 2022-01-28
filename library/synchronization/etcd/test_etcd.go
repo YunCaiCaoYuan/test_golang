@@ -1,4 +1,4 @@
-package main
+package etcd
 
 import (
 	"bufio"
@@ -13,10 +13,12 @@ import (
 	"github.com/coreos/etcd/clientv3/concurrency"
 )
 
+// fixme 没通！！！
+
 var (
-	nodeID    = flag.Int("id", 0, "node ID")
-	addr      = flag.String("addr", "http://127.0.0.1:12379,http://127.0.0.1:22379,http://127.0.0.1:32379", "etcd addresses")
-	electName = flag.String("name", "my-test-elect", "election name")
+	nodeID    = flag.Int("id", 1, "node ID")
+	addr      = flag.String("addr", "http://127.0.0.1:12379", "etcd addresses")
+	electName = flag.String("name", "infra1", "election name")
 )
 
 func main() {
