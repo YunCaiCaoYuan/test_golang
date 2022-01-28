@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"log"
 	"math/rand"
@@ -12,7 +13,7 @@ import (
 )
 
 var (
-	addr     = flag.String("addr", "http://127.0.0.1:2379", "etcd addresses")
+	addr     = flag.String("addr", "http://127.0.0.1:12379", "etcd addresses")
 	lockName = flag.String("name", "my-test-lock", "lock name")
 )
 
@@ -28,7 +29,7 @@ func main() {
 		log.Fatal(err)
 	}
 	defer cli.Close()
-	useLock(cli) // 测试锁
+	useMutex(cli) // 测试锁
 }
 
 func useLock(cli *clientv3.Client) {
@@ -50,5 +51,33 @@ func useLock(cli *clientv3.Client) {
 	time.Sleep(time.Duration(rand.Intn(30)) * time.Second)
 	locker.Unlock() // 释放锁
 
+	log.Println("released lock")
+}
+
+func useMutex(cli *clientv3.Client) {
+	// 为锁生成session
+	s1, err := concurrency.NewSession(cli)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer s1.Close()
+	m1 := concurrency.NewMutex(s1, *lockName)
+
+	//在请求锁之前查询key
+	log.Printf("before acquiring. key: %s", m1.Key())
+	// 请求锁
+	log.Println("acquiring lock")
+	if err := m1.Lock(context.TODO()); err != nil {
+		log.Fatal(err)
+	}
+	log.Printf("acquired lock. key: %s", m1.Key())
+
+	//等待一段时间
+	time.Sleep(time.Duration(rand.Intn(30)) * time.Second)
+
+	// 释放锁
+	if err := m1.Unlock(context.TODO()); err != nil {
+		log.Fatal(err)
+	}
 	log.Println("released lock")
 }
