@@ -4,14 +4,15 @@ import (
 	"fmt"
 	"golang.org/x/sync/singleflight"
 	"sync"
-)
-
-var (
-	sf = singleflight.Group{}
-	wg sync.WaitGroup
+	"time"
 )
 
 func main() {
+	var (
+		sf = singleflight.Group{}
+		wg sync.WaitGroup
+	)
+
 	//intMap := make(map[string]int)
 	var intMap sync.Map
 
@@ -25,11 +26,21 @@ func main() {
 			//if val, ok := intMap[key]; !ok {
 			if val, ok := intMap.Load(key); !ok {
 
-				do, err, _ := sf.Do(key, func() (interface{}, error) {
+				do, err, shared := sf.Do(key, func() (interface{}, error) {
+					fmt.Println("mock exec, no val:", "vth:", v)
+
+					// 提高下游请求并发
+					go func() {
+						time.Sleep(10 * time.Millisecond)
+						fmt.Printf("Deleting key: %v, v: %v\n", key, v)
+						sf.Forget(key)
+					}()
+
 					// fixme db操作或耗时操作
-					fmt.Println("no val:", "vth:", v)
+					time.Sleep(15 * time.Millisecond)
 					return 123, nil
 				})
+
 				if err != nil {
 					fmt.Println("err:", err)
 					return
@@ -38,13 +49,18 @@ func main() {
 				if newVal, ok := do.(int); ok {
 					//intMap[key] = newVal
 					intMap.Store(key, newVal)
-					fmt.Println("create val:", "vth:", v)
+					fmt.Println("singleflight val:", "vth:", v, "newVal:", newVal, "shared:", shared)
 				}
 
 			} else {
-				fmt.Println("val:", val, "vth:", v)
+				fmt.Println("read memory, val:", val, "vth:", v)
 			}
 		}(i)
+
+		// 模拟上游请求: 分多次并发
+		if i == 50 {
+			time.Sleep(10 * time.Millisecond)
+		}
 	}
 
 	wg.Wait()
@@ -55,4 +71,4 @@ func main() {
 // 不是必现，大概率出现
 
 // 用sync.map和singleflight
-// sync.map保证并发安全，singleflight合并并发db操作，保证load一次db。
+// sync.map保证并发安全，singleflight合并并发db操作，降低请求数量级。
