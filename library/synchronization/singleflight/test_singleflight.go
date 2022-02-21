@@ -19,6 +19,7 @@ var (
 func main() {
 	for i := 0; i < 100; i++ {
 		wg.Add(1)
+		//sf := singleflight.Group{}
 		go func(v int) {
 			log.Println("i123:", v)
 			do, err, _ := sf.Do("number", Request)

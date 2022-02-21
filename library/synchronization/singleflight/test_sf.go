@@ -9,7 +9,7 @@ import (
 
 func main() {
 	var (
-		sf = singleflight.Group{}
+		//sf = singleflight.Group{}
 		wg sync.WaitGroup
 	)
 
@@ -25,7 +25,7 @@ func main() {
 			key := "abc"
 			//if val, ok := intMap[key]; !ok {
 			if val, ok := intMap.Load(key); !ok {
-
+				sf := singleflight.Group{}
 				do, err, shared := sf.Do(key, func() (interface{}, error) {
 					fmt.Println("mock exec, no val:", "vth:", v)
 
@@ -72,3 +72,5 @@ func main() {
 
 // 用sync.map和singleflight
 // sync.map保证并发安全，singleflight合并并发db操作，降低请求数量级。
+
+// singleflight要定义成全局变量，local var没用
