@@ -24,6 +24,8 @@ func Test_GetTop(t *testing.T) {
 	fmt.Println("GetTop", list)
 }
 
+// 访问超过下标的切片会panic
+
 func array() [1024]int {
 	var x [1024]int
 	for i := 0; i < len(x); i++ {
