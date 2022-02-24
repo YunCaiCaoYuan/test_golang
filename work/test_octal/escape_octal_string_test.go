@@ -12,21 +12,23 @@ type MailMsg struct {
 	Data     []byte `protobuf:"bytes,4,opt,name=data,proto3" json:"data,omitempty"`
 	MailType int32  `protobuf:"varint,5,opt,name=mail_type,json=mailType" json:"mail_type,omitempty"`
 }
-func (m *MailMsg) Reset()                    { *m = MailMsg{} }
-func (m *MailMsg) String() string            { return proto.CompactTextString(m) }
-func (*MailMsg) ProtoMessage()               {}
+
+func (m *MailMsg) Reset()         { *m = MailMsg{} }
+func (m *MailMsg) String() string { return proto.CompactTextString(m) }
+func (*MailMsg) ProtoMessage()    {}
 
 type BroadcastMailMsg struct {
 	Mail *MailMsg `protobuf:"bytes,1,opt,name=mail" json:"mail,omitempty"`
 }
-func (m *BroadcastMailMsg) Reset()                    { *m = BroadcastMailMsg{} }
-func (m *BroadcastMailMsg) String() string            { return proto.CompactTextString(m) }
-func (*BroadcastMailMsg) ProtoMessage()               {}
+
+func (m *BroadcastMailMsg) Reset()         { *m = BroadcastMailMsg{} }
+func (m *BroadcastMailMsg) String() string { return proto.CompactTextString(m) }
+func (*BroadcastMailMsg) ProtoMessage()    {}
 
 func TestEscapeOctalString(t *testing.T) {
 	//s := "\\344\\275\\240\\345\\245\\275"
 	//s := "\\344\\275\\240\\345\\245\\275123"
-	s := "\\344\\271\\240\\350\\277\\221\\345\\271\\263"
+	s := "\\346\\265\\213\\350\\257\\225\\351\\242\\230\\345\\272\\223"
 	ret := EscapeOctalString(s)
 	t.Log("原转义\n", []byte(ret))
 	t.Log("转义\n", ret)
