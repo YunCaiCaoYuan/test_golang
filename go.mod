@@ -38,6 +38,7 @@ require (
 	github.com/rabbitmq/amqp091-go v1.3.0
 	github.com/sbinet/go-python v0.1.0
 	github.com/smartystreets/goconvey v1.7.2
+	github.com/speps/go-hashids v1.0.0
 	github.com/stretchr/testify v1.7.0
 	github.com/vardius/gollback v1.1.0
 	github.com/vmihailenco/msgpack v3.3.3+incompatible
@@ -46,7 +47,7 @@ require (
 	golang.org/x/net v0.0.0-20220121210141-e204ce36a2ba
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
 	golang.org/x/text v0.3.7
-	google.golang.org/grpc/examples v0.0.0-20220125225548-e27717498dbc // indirect
+	google.golang.org/grpc v1.39.0
 	gopkg.in/alexcesaro/quotedprintable.v3 v3.0.0-20150716171945-2caba252f4dc // indirect
 	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df // indirect
 )
