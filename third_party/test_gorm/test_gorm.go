@@ -84,6 +84,7 @@ func main() {
 	if res.Error != nil {
 		fmt.Println("res.Error=", res.Error)
 	}
+	// todo: cannot convert int to bool
 
 	/*
 			// Save 未设置id
