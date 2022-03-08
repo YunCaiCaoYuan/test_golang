@@ -27,13 +27,13 @@ const (
 )
 
 type Player struct {
-	Id          int64      `gorm:"column:Id"`
-	Id2         int64      `gorm:"column:Id2"`
-	Nickname    string     `gorm:"column:Nickname"`
-	Sex         SexType    `gorm:"column:Sex"`
-	Charm       int64      `gorm:"column:Charm"`
-	Wealth      int64      `gorm:"column:Wealth"`
-	Flags       int64      `gorm:"column:Flags"`
+	Id       int64  `gorm:"column:Id"`
+	Id2      int64  `gorm:"column:Id2"`
+	Nickname string `gorm:"column:Nickname"`
+	Sex      bool   `gorm:"column:Sex"`
+	Charm    int64  `gorm:"column:Charm"`
+	Wealth   int64  `gorm:"column:Wealth"`
+	Flags    int64  `gorm:"column:Flags"`
 	//Flags2      int64      `gorm:"column:Flags2"`
 	//Flags3      int64      `gorm:"column:Flags3"`
 	Icon        string     `gorm:"column:Icon"`
@@ -77,71 +77,80 @@ func main() {
 		fmt.Println("err=", err)
 	}
 
-	// Save 未设置id
-	obj := Player{Nickname: "sunbin", CreateAt: time.Now()}
-	fmt.Println("obj1:", obj)
-	db.Save(obj)
-	fmt.Println("obj2:", obj)
-//obj1: {0 0 sunbin 0 0 0 0  0 0 2022-01-19 11:48:03.199191 +0800 CST m=+0.003374795 0    0 false 0}
-//obj2: {0 0 sunbin 0 0 0 0  0 0 2022-01-19 11:48:03.199191 +0800 CST m=+0.003374795 0    0 false 0}
-
-
-	/*
-	//type countStruct struct {
-	//	Point int32 	`gorm:"column:Point"`
-	//}
-	//countVar := countStruct{}
-	countVar := int32(0)
-	//err = db.Raw("select Point from player where Id=1001082 ").Scan(&countVar).Error
-	//err = db.Raw("select count(*) from player where Id=1001082 ").Count(&countVar).Error
-	//err = db.Raw("select max(Id) from player where Id=1001082 ").Count(&countVar).Error // 1001082
-	err = db.Raw("select Point from player where Id=1001082 ").Count(&countVar).Error // 94
-	if err != nil {
-		log.Error("select fail", zap.Any("err", err))
+	res := db.Model(&Player{}).Where(" `Id`=? and `Sex`=0 ", 1001082).Updates(map[string]interface{}{
+		"Sex":      1,
+		"CreateAt": time.Now(),
+	})
+	if res.Error != nil {
+		fmt.Println("res.Error=", res.Error)
 	}
-	fmt.Println("point=", countVar)
-	 */
 
 	/*
-	// Pluck
-	//var ids []int64
-	type id struct {
-		Id          int64      `gorm:"column:Id"`
-	}
-	ids := make([]id, 0)
-	//err = db.Raw("select id from player where Point>0 ").Pluck("id", &ids).Error
-	err = db.Raw("select Id from player where Point>0 ").Scan(&ids).Error
-	if err != nil {
-		log.Error("Pluck fail", zap.Any("err", err))
-	}
-	fmt.Println("ids=", ids)
+			// Save 未设置id
+			obj := Player{Nickname: "sunbin", CreateAt: time.Now()}
+			fmt.Println("obj1:", obj)
+			db.Save(obj)
+			fmt.Println("obj2:", obj)
+		//obj1: {0 0 sunbin 0 0 0 0  0 0 2022-01-19 11:48:03.199191 +0800 CST m=+0.003374795 0    0 false 0}
+		//obj2: {0 0 sunbin 0 0 0 0  0 0 2022-01-19 11:48:03.199191 +0800 CST m=+0.003374795 0    0 false 0}
 	*/
 
 	/*
-	type countStruct struct {
-		Count int32 `gorm:"column:count"`
-	}
-	var countVar countStruct
-	id2 := 123482
-	err = db.Raw("select count(*) count from player where id2 = ? ", id2).Scan(&countVar).Error
-	if err != nil {
-		log.Error("IsId2Used fail", zap.Any("err", err))
-	}
-	fmt.Println("countVar.Count=", countVar.Count)
+		//type countStruct struct {
+		//	Point int32 	`gorm:"column:Point"`
+		//}
+		//countVar := countStruct{}
+		countVar := int32(0)
+		//err = db.Raw("select Point from player where Id=1001082 ").Scan(&countVar).Error
+		//err = db.Raw("select count(*) from player where Id=1001082 ").Count(&countVar).Error
+		//err = db.Raw("select max(Id) from player where Id=1001082 ").Count(&countVar).Error // 1001082
+		err = db.Raw("select Point from player where Id=1001082 ").Count(&countVar).Error // 94
+		if err != nil {
+			log.Error("select fail", zap.Any("err", err))
+		}
+		fmt.Println("point=", countVar)
 	*/
 
 	/*
-	// 提供TableName方法
-	isFind := db.HasTable(&Player{})
-	fmt.Println("isFind=", isFind)
-	//ret := Player{}
-	player := new(Player)
-	err = db.Where("id = 999").First(player).Error
-	if err != nil {
-		fmt.Println("err=", err)
-	}
-	fmt.Println("player.Facade=", player.Facade)
-	 */
+		// Pluck
+		//var ids []int64
+		type id struct {
+			Id          int64      `gorm:"column:Id"`
+		}
+		ids := make([]id, 0)
+		//err = db.Raw("select id from player where Point>0 ").Pluck("id", &ids).Error
+		err = db.Raw("select Id from player where Point>0 ").Scan(&ids).Error
+		if err != nil {
+			log.Error("Pluck fail", zap.Any("err", err))
+		}
+		fmt.Println("ids=", ids)
+	*/
+
+	/*
+		type countStruct struct {
+			Count int32 `gorm:"column:count"`
+		}
+		var countVar countStruct
+		id2 := 123482
+		err = db.Raw("select count(*) count from player where id2 = ? ", id2).Scan(&countVar).Error
+		if err != nil {
+			log.Error("IsId2Used fail", zap.Any("err", err))
+		}
+		fmt.Println("countVar.Count=", countVar.Count)
+	*/
+
+	/*
+		// 提供TableName方法
+		isFind := db.HasTable(&Player{})
+		fmt.Println("isFind=", isFind)
+		//ret := Player{}
+		player := new(Player)
+		err = db.Where("id = 999").First(player).Error
+		if err != nil {
+			fmt.Println("err=", err)
+		}
+		fmt.Println("player.Facade=", player.Facade)
+	*/
 
 	// 推导的表名不对 channel_rels
 	//id := 20000101

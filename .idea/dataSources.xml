@@ -8,7 +8,7 @@
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/test.db</jdbc-url>
     </data-source>
     <data-source source="LOCAL" name="xiaojuzi" uuid="833f9a94-dd86-42c4-865a-8e05632599ba">
-      <driver-ref>sqlite.xerial</driver-ref>
+      <driver-ref>52bae478-d6ad-4ddd-950f-5fcf732102a9</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/call_python/xiaojuzi.sqlite3</jdbc-url>
@@ -20,6 +20,13 @@
           <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.31.1/license.txt</url>
         </library>
       </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="local" uuid="cc6369d0-3b28-461c-88be-b0dfcd15b591">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
 </project>
