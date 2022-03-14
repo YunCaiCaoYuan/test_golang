@@ -1,4 +1,4 @@
-package lexer
+package main
 
 type TokenReader interface {
 	Read() Token

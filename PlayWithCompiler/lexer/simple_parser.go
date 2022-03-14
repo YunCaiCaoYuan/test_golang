@@ -1,4 +1,4 @@
-package lexer
+package main
 
 import (
 	"bytes"
@@ -166,7 +166,7 @@ func (this *SimpleParser) multiplicative(tokens *simpleTokenReader) *SimpleASTNo
 	return node
 }
 
-// todo 基础表达式
+// 基础表达式
 func (this *SimpleParser) primary(tokens *simpleTokenReader) *SimpleASTNode {
 	var node *SimpleASTNode
 	token := tokens.Peek()

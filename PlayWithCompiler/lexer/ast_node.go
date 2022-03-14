@@ -1,4 +1,4 @@
-package lexer
+package main
 
 type ASTNode interface {
 	getParent() *ASTNode

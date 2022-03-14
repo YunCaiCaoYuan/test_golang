@@ -1,4 +1,4 @@
-package lexer
+package main
 
 type Token interface {
 	getType() TokenType
