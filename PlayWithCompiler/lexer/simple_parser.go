@@ -3,6 +3,7 @@ package lexer
 import (
 	"bytes"
 	"encoding/gob"
+	"fmt"
 )
 
 // 语法解析器
@@ -20,10 +21,10 @@ func (this *SimpleParser) prog(tokens *simpleTokenReader) *SimpleASTNode {
 	for tokens.Peek() != nil {
 		child := this.intDeclare(tokens)
 		if child == nil {
-			//child = expressionStatement(tokens)
+			child = this.expressionStatement(tokens)
 		}
 		if child == nil {
-			//child = assignmentStatement(tokens)
+			child = this.assignmentStatement(tokens)
 		}
 		if child != nil {
 			node.addChild(child)
@@ -133,7 +134,7 @@ func (this *SimpleParser) additive(tokens *simpleTokenReader) *SimpleASTNode {
 					panic("invalid additive expression, expecting the right part.")
 				}
 			} else {
-				break;
+				break
 			}
 		}
 	}
@@ -142,12 +143,57 @@ func (this *SimpleParser) additive(tokens *simpleTokenReader) *SimpleASTNode {
 
 // 乘法表达式
 func (this *SimpleParser) multiplicative(tokens *simpleTokenReader) *SimpleASTNode {
-	return nil
+	child1 := this.primary(tokens)
+	node := child1
+	for {
+		token := tokens.Peek()
+		if token != nil && (token.getType() == Star || token.getType() == Slash) {
+			token = tokens.Read()
+			child2 := this.primary(tokens)
+			if child2 != nil {
+				node := NewSimpleASTNode(Multiplicative, token.getText())
+				node.addChild(child1)
+				node.addChild(child2)
+				child1 = node
+			} else {
+				panic("invalid multiplicative expression, expecting the right part.")
+			}
+		} else {
+			break
+		}
+	}
+
+	return node
 }
 
 // todo 基础表达式
 func (this *SimpleParser) primary(tokens *simpleTokenReader) *SimpleASTNode {
-	return nil
+	var node *SimpleASTNode
+	token := tokens.Peek()
+	if token != nil {
+		if token.getType() == IntLiteral_ {
+			token = tokens.Read()
+			node = NewSimpleASTNode(IntLiteral, token.getText())
+		} else if token.getType() == Identifier_ {
+			token = tokens.Read()
+			node = NewSimpleASTNode(Identifier, token.getText())
+		} else if token.getType() == LeftParen {
+			tokens.Read()
+			node = this.additive(tokens)
+			if node != nil {
+				token = tokens.Peek()
+				if token != nil && token.getType() == RightParen {
+					tokens.Read()
+				} else {
+					panic("expecting right parenthesis")
+				}
+			} else {
+				panic("expecting an additive expression inside parenthesis")
+			}
+		}
+	}
+
+	return node
 }
 
 // 一个简单的AST节点
@@ -190,4 +236,9 @@ func (this *SimpleASTNode) addChild(child *SimpleASTNode) {
 	return
 }
 
-// todo dumpAST
+func (this *SimpleASTNode) dumpAST(node *SimpleASTNode, indent string) {
+	fmt.Println("indent", node.getType(), " ", node.getText())
+	for _, child := range node.getChildren() {
+		this.dumpAST(child, indent+"\t")
+	}
+}

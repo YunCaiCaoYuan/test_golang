@@ -7,8 +7,8 @@ import (
 
 type SimpleLexer struct {
 	tokenText *bytes.Buffer // StringBuffer
-	tokens    []Token
-	token     Token
+	tokens    []*simpleToken
+	token     *simpleToken
 }
 
 func (this *SimpleLexer) isAlpha(ch byte) bool {
@@ -38,14 +38,64 @@ func (this *SimpleLexer) initToken(ch byte) DfaState {
 	}
 
 	newState := Initial
-	// todo
+	if this.isAlpha(ch) {
+		if ch == 'i' {
+			newState = Id_int1
+		} else {
+			newState = Id
+		}
+		this.token.setType(Identifier_)
+		this.tokenText.WriteByte(ch)
+	} else if this.isDigit(ch) {
+		newState = IntLiteral__
+		this.token.setType(IntLiteral_)
+		this.tokenText.WriteByte(ch)
+	} else if ch == '>' {
+		newState = GT_
+		this.token.setType(GT)
+		this.tokenText.WriteByte(ch)
+	} else if ch == '+' {
+		newState = Plus_
+		this.token.setType(Plus)
+		this.tokenText.WriteByte(ch)
+	} else if ch == '-' {
+		newState = Minus_
+		this.token.setType(Minus)
+		this.tokenText.WriteByte(ch)
+	} else if ch == '*' {
+		newState = Star_
+		this.token.setType(Star)
+		this.tokenText.WriteByte(ch)
+	} else if ch == '/' {
+		newState = Slash_
+		this.token.setType(Slash)
+		this.tokenText.WriteByte(ch)
+	} else if ch == ';' {
+		newState = SemiColon_
+		this.token.setType(SemiColon)
+		this.tokenText.WriteByte(ch)
+	} else if ch == '(' {
+		newState = LeftParen_
+		this.token.setType(SemiColon)
+		this.tokenText.WriteByte(ch)
+	} else if ch == ')' {
+		newState = RightParen_
+		this.token.setType(RightParen)
+		this.tokenText.WriteByte(ch)
+	} else if ch == '=' {
+		newState = Assignment_
+		this.token.setType(Assignment)
+		this.tokenText.WriteByte(ch)
+	} else {
+		newState = Initial
+	}
 
 	return newState
 }
 
 // 解析字符串，形成Token
 func (this *SimpleLexer) tokenize(code string) *simpleTokenReader {
-	this.tokens = make([]Token, 0)
+	this.tokens = make([]*simpleToken, 0)
 
 	reader := bytes.NewBufferString(code)
 	state := Initial
@@ -61,12 +111,58 @@ func (this *SimpleLexer) tokenize(code string) *simpleTokenReader {
 			} else {
 				state = this.initToken(ch)
 			}
-		}
-		// todo
+		case GT_:
+			if ch == '=' {
+				this.token.setType(GE)
+				state = GE_
+			} else {
+				state = this.initToken(ch)
+			}
+		case GE_, Assignment_, Plus_, Minus_, Star_, Slash_, SemiColon_, LeftParen_, RightParen_:
+			state = this.initToken(ch)
+		case IntLiteral__:
+			if this.isDigit(ch) {
+				this.tokenText.WriteByte(ch)
+			} else {
+				state = this.initToken(ch)
+			}
+		case Id_int1:
+			if ch == 'n' {
+				state = Id_int2
+				this.tokenText.WriteByte(ch)
+			} else if this.isDigit(ch) || this.isAlpha(ch) {
+				state = Id
+				this.tokenText.WriteByte(ch)
+			} else {
+				state = this.initToken(ch)
+			}
+		case Id_int2:
+			if ch == 't' {
+				state = Id_int3
+				this.tokenText.WriteByte(ch)
+			} else if this.isDigit(ch) || this.isAlpha(ch) {
+				state = Id
+				this.tokenText.WriteByte(ch)
+			} else {
+				state = this.initToken(ch)
+			}
+		case Id_int3:
+			if this.isBlank(ch) {
+				this.token.setType(Int)
+				state = this.initToken(ch)
+			} else {
+				state = Id
+				this.tokenText.WriteByte(ch)
+			}
+		default:
 
+		}
+		if this.tokenText.Len() > 0 {
+			this.initToken(ch)
+		}
 	}
 
-	return nil
+	return &simpleTokenReader{tokens: this.tokens}
 }
 
 // Token的一个简单实现
@@ -83,6 +179,9 @@ func (this *simpleToken) getText() string {
 }
 func (this *simpleToken) setText(text string) {
 	this.text = text
+}
+func (this *simpleToken) setType(typ TokenType) {
+	this.typ = typ
 }
 
 func (this *simpleToken) Dump(tokenReader simpleTokenReader) {
