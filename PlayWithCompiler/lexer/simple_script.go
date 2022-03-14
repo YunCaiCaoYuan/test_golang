@@ -11,7 +11,6 @@ import (
 )
 
 // 一个简单的脚本解释器
-
 type SimpleScript struct {
 	variables map[string]int
 	verbose   bool
@@ -47,7 +46,7 @@ func main() {
 
 	for {
 		line0, _ := reader.ReadString('\n')
-		line := strings.Trim(line0, " ")
+		line := strings.TrimRight(line0, "\n")
 		if line == "exit();" {
 			fmt.Println("good bye!")
 			break
@@ -102,6 +101,7 @@ func (this *SimpleScript) evaluate(node *SimpleASTNode, indent string) int {
 		}
 	case IntLiteral:
 		result, _ = strconv.Atoi(node.getText())
+		fmt.Println("evaluate IntLiteral", node.getText(), " ", result)
 	case Identifier:
 		varName := node.getText()
 		if _, ok := this.variables[varName]; ok {

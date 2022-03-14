@@ -11,6 +11,13 @@ type SimpleLexer struct {
 	token     *simpleToken
 }
 
+func NewSimpleLexer() *SimpleLexer {
+	return &SimpleLexer{
+		tokenText: new(bytes.Buffer),
+		token:     new(simpleToken),
+	}
+}
+
 func (this *SimpleLexer) isAlpha(ch byte) bool {
 	return ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z'
 }
@@ -157,9 +164,10 @@ func (this *SimpleLexer) tokenize(code string) *simpleTokenReader {
 		default:
 
 		}
-		if this.tokenText.Len() > 0 {
-			this.initToken(ch)
-		}
+	}
+
+	if this.tokenText.Len() > 0 {
+		this.initToken(ch)
 	}
 
 	return &simpleTokenReader{tokens: this.tokens}

@@ -1,16 +1,15 @@
 package main
 
 import (
-	"bytes"
-	"encoding/gob"
 	"fmt"
+	"reflect"
 )
 
 // 语法解析器
 type SimpleParser struct{}
 
 func (this *SimpleParser) parse(script string) *SimpleASTNode {
-	lexer := new(SimpleLexer)
+	lexer := NewSimpleLexer()
 	tokens := lexer.tokenize(script)
 	rootNode := this.prog(tokens)
 	return rootNode
@@ -198,46 +197,53 @@ func (this *SimpleParser) primary(tokens *simpleTokenReader) *SimpleASTNode {
 
 // 一个简单的AST节点
 type SimpleASTNode struct {
-	parent        *SimpleASTNode
-	children      []*SimpleASTNode
-	cloneChildren []*SimpleASTNode
-	nodeType      ASTNodeType
-	text          string
+	Parent        *SimpleASTNode
+	Children      []*SimpleASTNode
+	CloneChildren []*SimpleASTNode
+	NodeType      ASTNodeType
+	Text          string
 }
 
 func NewSimpleASTNode(nodeType ASTNodeType, text string) *SimpleASTNode {
 	return &SimpleASTNode{
-		nodeType: nodeType,
-		text:     text,
+		NodeType: nodeType,
+		Text:     text,
 	}
 }
 func (this *SimpleASTNode) getParent() *SimpleASTNode {
-	return this.parent
+	return this.Parent
 }
 func (this *SimpleASTNode) getChildren() []*SimpleASTNode {
-	var buf bytes.Buffer
-	if err := gob.NewEncoder(&buf).Encode(&this.children); err != nil {
-		panic("getChildren" + err.Error())
-	}
-	if err := gob.NewDecoder(bytes.NewReader(buf.Bytes())).Decode(&this.cloneChildren); err != nil {
-		panic("getChildren" + err.Error())
-	}
-	return this.cloneChildren
+	/*
+		if this.CloneChildren == nil {
+			var buf bytes.Buffer
+			if err := gob.NewEncoder(&buf).Encode(&this.Children); err != nil {
+				panic("getChildren" + err.Error())
+			}
+			if err := gob.NewDecoder(bytes.NewReader(buf.Bytes())).Decode(&this.CloneChildren); err != nil {
+				panic("getChildren" + err.Error())
+			}
+		}
+		return this.CloneChildren
+	*/
+
+	return this.Children
 }
 func (this *SimpleASTNode) getType() ASTNodeType {
-	return this.nodeType
+	return this.NodeType
 }
 func (this *SimpleASTNode) getText() string {
-	return this.text
+	return this.Text
 }
 func (this *SimpleASTNode) addChild(child *SimpleASTNode) {
-	this.children = append(this.children, child)
-	child.parent = this
+	this.Children = append(this.Children, child)
+	child.Parent = this
 	return
 }
 
 func (this *SimpleASTNode) dumpAST(node *SimpleASTNode, indent string) {
-	fmt.Println("indent", node.getType(), " ", node.getText())
+
+	fmt.Println("indent", reflect.ValueOf(node.getType()).Type(), " ", node.getText())
 	for _, child := range node.getChildren() {
 		this.dumpAST(child, indent+"\t")
 	}
