@@ -192,11 +192,12 @@ func (this *simpleToken) setType(typ TokenType) {
 	this.typ = typ
 }
 
-func (this *simpleToken) Dump(tokenReader simpleTokenReader) {
+func (this *simpleToken) Dump(tokenReader *simpleTokenReader) {
 	fmt.Println("text\ttype")
-	var token Token
-	for token = tokenReader.Read(); token == nil; token = tokenReader.Read() {
-		fmt.Println(token.getText(), "\t\t", token.getType())
+	var token *simpleToken
+	for token = tokenReader.Read(); token != nil; token = tokenReader.Read() {
+		getType := token.getType()
+		fmt.Println(token.getText(), "\t\t", getType.String())
 	}
 }
 
