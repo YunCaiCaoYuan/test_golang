@@ -9,7 +9,6 @@ type SimpleCalculator struct{}
 
 func (this *SimpleCalculator) evaluate(script string) {
 	tree := this.parse(script)
-	// dumpAST(tree, "")
 	this.evaluate2(tree, "")
 }
 

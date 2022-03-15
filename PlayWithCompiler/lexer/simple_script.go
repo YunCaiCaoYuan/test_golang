@@ -72,7 +72,7 @@ func (this *SimpleScript) evaluate(node *SimpleASTNode, indent string) int {
 	result := 0
 	if verbose {
 		getType := node.getType()
-		fmt.Println("indent", "Calculating: ", getType.String())
+		fmt.Println(indent, "Calculating: ", getType.String())
 	}
 
 	switch node.getType() {

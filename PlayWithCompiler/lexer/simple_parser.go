@@ -244,7 +244,7 @@ func (this *SimpleASTNode) addChild(child *SimpleASTNode) {
 
 func (this *SimpleASTNode) dumpAST(node *SimpleASTNode, indent string) {
 	getType := node.getType()
-	fmt.Println("indent", getType.String(), " ", node.getText())
+	fmt.Println(indent, getType.String(), " ", node.getText())
 	for _, child := range node.getChildren() {
 		this.dumpAST(child, indent+"\t")
 	}
