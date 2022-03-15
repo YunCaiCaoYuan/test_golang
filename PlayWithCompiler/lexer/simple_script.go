@@ -27,17 +27,30 @@ var verbose bool
 
 // 一个简单的REPL
 func main() {
-	defer func() {
-		if p := recover(); p != nil {
-			fmt.Printf("panic recover! p:%v", p)
-			debug.PrintStack()
-		}
-	}()
-
 	flag.BoolVar(&verbose, "verbose", false, "verbose mode")
 	flag.Parse()
 	fmt.Println("Simple script language!")
 
+	loop2()
+
+	select {}
+}
+
+func loop2() {
+	go func() {
+		defer func() {
+			if p := recover(); p != nil {
+				fmt.Printf("panic recover! p:%v", p)
+				debug.PrintStack()
+				loop2()
+			}
+		}()
+
+		loop()
+	}()
+}
+
+func loop() {
 	parser := &SimpleParser{}
 	script := NewSimpleScript()
 	reader := bufio.NewReader(os.Stdin)
