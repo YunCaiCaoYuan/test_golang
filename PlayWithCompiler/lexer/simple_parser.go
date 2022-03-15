@@ -86,7 +86,7 @@ func (this *SimpleParser) intDeclare(tokens *simpleTokenReader) *SimpleASTNode {
 		token = tokens.Read()
 		if tokens.Peek().getType() == Identifier_ {
 			token = tokens.Read()
-			node := NewSimpleASTNode(IntDeclaration, token.getText())
+			node = NewSimpleASTNode(IntDeclaration, token.getText())
 			token = tokens.Peek()
 			if token != nil && token.getType() == Assignment {
 				tokens.Read()
