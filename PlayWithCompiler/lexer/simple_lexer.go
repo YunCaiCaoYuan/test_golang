@@ -245,9 +245,10 @@ func (this *simpleTokenReader) SimpleTokenReader() {
 	this.tokens = make([]*simpleToken, 0)
 }
 func (this *simpleTokenReader) Read() *simpleToken {
-	this.pos++
 	if this.pos < len(this.tokens) {
-		return this.tokens[this.pos]
+		tmp := this.tokens[this.pos]
+		this.pos++
+		return tmp
 	}
 	return nil
 }

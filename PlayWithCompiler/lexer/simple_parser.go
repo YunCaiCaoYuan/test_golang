@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"reflect"
 )
 
 // 语法解析器
@@ -117,7 +116,8 @@ func (this *SimpleParser) intDeclare(tokens *simpleTokenReader) *SimpleASTNode {
 // 加法表达式
 func (this *SimpleParser) additive(tokens *simpleTokenReader) *SimpleASTNode {
 	child1 := this.multiplicative(tokens)
-	node := child1
+	var node *SimpleASTNode
+	node = child1
 	if child1 != nil {
 		for {
 			token := tokens.Peek()
@@ -143,14 +143,15 @@ func (this *SimpleParser) additive(tokens *simpleTokenReader) *SimpleASTNode {
 // 乘法表达式
 func (this *SimpleParser) multiplicative(tokens *simpleTokenReader) *SimpleASTNode {
 	child1 := this.primary(tokens)
-	node := child1
+	var node *SimpleASTNode
+	node = child1
 	for {
 		token := tokens.Peek()
 		if token != nil && (token.getType() == Star || token.getType() == Slash) {
 			token = tokens.Read()
 			child2 := this.primary(tokens)
 			if child2 != nil {
-				node := NewSimpleASTNode(Multiplicative, token.getText())
+				node = NewSimpleASTNode(Multiplicative, token.getText())
 				node.addChild(child1)
 				node.addChild(child2)
 				child1 = node
@@ -242,8 +243,8 @@ func (this *SimpleASTNode) addChild(child *SimpleASTNode) {
 }
 
 func (this *SimpleASTNode) dumpAST(node *SimpleASTNode, indent string) {
-
-	fmt.Println("indent", reflect.ValueOf(node.getType()).Type(), " ", node.getText())
+	getType := node.getType()
+	fmt.Println("indent", getType.String(), " ", node.getText())
 	for _, child := range node.getChildren() {
 		this.dumpAST(child, indent+"\t")
 	}

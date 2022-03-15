@@ -71,7 +71,8 @@ func main() {
 func (this *SimpleScript) evaluate(node *SimpleASTNode, indent string) int {
 	result := 0
 	if verbose {
-		fmt.Println("indent", "Calculating: ", node.getType())
+		getType := node.getType()
+		fmt.Println("indent", "Calculating: ", getType.String())
 	}
 
 	switch node.getType() {
@@ -87,7 +88,7 @@ func (this *SimpleScript) evaluate(node *SimpleASTNode, indent string) int {
 		if node.getText() == "+" {
 			result = value1 + value2
 		} else {
-			result = value1 + value2
+			result = value1 - value2
 		}
 	case Multiplicative:
 		child1 := node.getChildren()[0]
@@ -101,7 +102,6 @@ func (this *SimpleScript) evaluate(node *SimpleASTNode, indent string) int {
 		}
 	case IntLiteral:
 		result, _ = strconv.Atoi(node.getText())
-		fmt.Println("evaluate IntLiteral", node.getText(), " ", result)
 	case Identifier:
 		varName := node.getText()
 		if _, ok := this.variables[varName]; ok {
