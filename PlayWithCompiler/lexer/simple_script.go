@@ -116,6 +116,7 @@ func (this *SimpleScript) evaluate(node *SimpleASTNode, indent string) int {
 		if _, ok := this.variables[varName]; !ok {
 			panic(fmt.Errorf("unknown variable: " + varName))
 		}
+		fallthrough
 	case IntDeclaration:
 		varName := node.getText()
 		var varValue int
