@@ -35,6 +35,7 @@ func main() {
 	}()
 
 	flag.BoolVar(&verbose, "verbose", false, "verbose mode")
+	flag.Parse()
 	fmt.Println("Simple script language!")
 
 	parser := &SimpleParser{}
