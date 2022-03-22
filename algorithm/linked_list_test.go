@@ -33,7 +33,6 @@ func printList(head *node) {
 		print(head.val, " ")
 		head = head.next
 	}
-	print("\n")
 }
 
 // 1->2->3->4->5
@@ -68,3 +67,88 @@ func Test_reverseList3(t *testing.T) {
 	print("after reverse:\n")
 	printList(reverseList(nil))
 }
+
+// ------------------------------------------------------------
+func swapList(head *node) *node {
+	if head == nil || head.next == nil {
+		return head
+	}
+
+	p1 := head
+	p2 := head.next
+	for p1 != nil && p2 != nil {
+		p1.val, p2.val = p2.val, p1.val
+		p1 = p2.next
+		if p1 != nil {
+			p2 = p1.next
+		}
+	}
+	return head
+}
+
+// 1->2
+// 2->1
+func Test_swapList1(t *testing.T) {
+	nod := &node{val: 1}
+	tmp := nod
+	for i := 1; i < 2; i++ {
+		newNod := &node{val: i + 1}
+		tmp.next = newNod
+		tmp = newNod
+	}
+	printList(nod)
+
+	print("after swap:\n")
+	printList(swapList(nod))
+}
+
+// 1->2->3
+// 2->1->3
+func Test_swapList2(t *testing.T) {
+	nod := &node{val: 1}
+	tmp := nod
+	for i := 1; i < 3; i++ {
+		newNod := &node{val: i + 1}
+		tmp.next = newNod
+		tmp = newNod
+	}
+	printList(nod)
+
+	print("after swap:\n")
+	printList(swapList(nod))
+}
+
+// 1
+// 1
+func Test_swapList3(t *testing.T) {
+	nod := &node{val: 1}
+	printList(nod)
+
+	print("after swap:\n")
+	printList(swapList(nod))
+}
+
+// nil
+// nil
+func Test_swapList4(t *testing.T) {
+	var nod *node
+	printList(nod)
+
+	print("after swap:\n")
+	printList(swapList(nod))
+}
+func Test_swapList5(t *testing.T) {
+	nod := &node{val: 1}
+	tmp := nod
+	for i := 1; i < 11; i++ {
+		newNod := &node{val: i + 1}
+		tmp.next = newNod
+		tmp = newNod
+	}
+	printList(nod)
+
+	print("after swap:\n")
+	printList(swapList(nod))
+}
+
+// eg: go test -v linked_list_test.go -run=swapList
