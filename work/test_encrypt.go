@@ -31,4 +31,7 @@ func main() {
 	str := Encode(id)
 	fmt.Println("Encode(id):", str)
 	fmt.Println("Decode(id):", Decode(str))
+
+	str2 := "qGqlB"
+	fmt.Println("Decode(id):", Decode(str2))
 }
