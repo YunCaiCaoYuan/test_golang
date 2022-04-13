@@ -19,3 +19,8 @@ func Test_divide(t *testing.T) {
 	fmt.Printf("%d\n", a/b)
 	fmt.Printf("%0.2f\n", float32(a)/float32(b))
 }
+
+func Test_int_format(t *testing.T) {
+	a := 1
+	fmt.Printf("%8d\n", a)
+}
