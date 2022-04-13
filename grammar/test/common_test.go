@@ -24,3 +24,10 @@ func Test_int_format(t *testing.T) {
 	a := 1
 	fmt.Printf("%8d\n", a)
 }
+
+// 空格美化
+func Test_blank(t *testing.T) {
+	fmt.Println("你好\u30001")
+	fmt.Println("你\u3000\u30001")
+	fmt.Println("\u3000\u3000\u30001")
+}
