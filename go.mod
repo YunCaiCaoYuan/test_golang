@@ -42,6 +42,7 @@ require (
 	github.com/stretchr/testify v1.7.0
 	github.com/vardius/gollback v1.1.0
 	github.com/vmihailenco/msgpack v3.3.3+incompatible
+	github.com/xxtea/xxtea-go v0.0.0-20170828040851-35c4b17eecf6 // indirect
 	go.uber.org/zap v1.20.0
 	golang.org/x/crypto v0.0.0-20220112180741-5e0467b6c7ce
 	golang.org/x/net v0.0.0-20220121210141-e204ce36a2ba
