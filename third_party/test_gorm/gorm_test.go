@@ -38,3 +38,15 @@ func Test_StructTag(t *testing.T) {
 	}
 	log.Info("Test_StructTag", zap.Any("list", list))
 }
+
+// scan列表数据到数组，Scan不行
+func Test_ScanList(t *testing.T) {
+	start()
+	list := make([]int64, 0)
+	sql := "select id from player where sex>0"
+	if err := db.Raw(sql).Pluck("id", &list).Error; err != nil {
+		fmt.Println("err=", err)
+		return
+	}
+	log.Info("Test_ScanList", zap.Any("list", list))
+}
