@@ -38,11 +38,13 @@ require (
 	github.com/rabbitmq/amqp091-go v1.3.0
 	github.com/sbinet/go-python v0.1.0
 	github.com/smartystreets/goconvey v1.7.2
+	github.com/sony/sonyflake v1.0.0
 	github.com/speps/go-hashids v1.0.0
 	github.com/stretchr/testify v1.7.0
 	github.com/vardius/gollback v1.1.0
 	github.com/vmihailenco/msgpack v3.3.3+incompatible
-	github.com/xxtea/xxtea-go v0.0.0-20170828040851-35c4b17eecf6 // indirect
+	github.com/xxtea/xxtea-go v0.0.0-20170828040851-35c4b17eecf6
+	github.com/zheng-ji/goSnowFlake v0.0.0-20180906112711-fc763800eec9 // indirect
 	go.uber.org/zap v1.20.0
 	golang.org/x/crypto v0.0.0-20220112180741-5e0467b6c7ce
 	golang.org/x/net v0.0.0-20220121210141-e204ce36a2ba
