@@ -29,6 +29,8 @@ require (
 	github.com/mdlayher/schedgroup v0.0.0-20200506182200-45678742bdc7
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.1 // indirect
+	github.com/olivere/elastic v6.2.37+incompatible // indirect
+	github.com/olivere/elastic/v7 v7.0.32
 	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/gomega v1.18.0
 	github.com/pieterclaerhout/go-waitgroup v1.0.7
@@ -44,10 +46,10 @@ require (
 	github.com/vardius/gollback v1.1.0
 	github.com/vmihailenco/msgpack v3.3.3+incompatible
 	github.com/xxtea/xxtea-go v0.0.0-20170828040851-35c4b17eecf6
-	github.com/zheng-ji/goSnowFlake v0.0.0-20180906112711-fc763800eec9 // indirect
+	github.com/zheng-ji/goSnowFlake v0.0.0-20180906112711-fc763800eec9
 	go.uber.org/zap v1.20.0
 	golang.org/x/crypto v0.0.0-20220112180741-5e0467b6c7ce
-	golang.org/x/net v0.0.0-20220121210141-e204ce36a2ba
+	golang.org/x/net v0.0.0-20220127200216-cd36cc0744dd
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
 	golang.org/x/text v0.3.7
 	google.golang.org/grpc v1.39.0
