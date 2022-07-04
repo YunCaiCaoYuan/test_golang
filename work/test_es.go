@@ -27,7 +27,7 @@ func main() {
 			"X-Caller-Id": []string{"..."},
 		}),
 	)
-	fmt.Println("client start", client)
+	fmt.Println("client start:", client)
 	if err != nil {
 		fmt.Println(err)
 	}
