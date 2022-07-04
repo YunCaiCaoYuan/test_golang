@@ -45,16 +45,25 @@ func main() {
 		fmt.Println(err)
 	}
 
-	// Create a new index.
 	indexName := "twitter"
 	ctx := context.Background()
-	createIndex, err := client.CreateIndex(indexName).Do(ctx)
+
+	// Use the IndexExists service to check if a specified index exists.
+	exists, err := client.IndexExists(indexName).Do(ctx)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-	if !createIndex.Acknowledged {
-		fmt.Println("create index not acknowledged")
+	if exists {
+		// Create a new index.
+		createIndex, err := client.CreateIndex(indexName).Do(ctx)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		if !createIndex.Acknowledged {
+			fmt.Println("create index not acknowledged")
+		}
 	}
 
 	// Index a tweet (using JSON serialization)
