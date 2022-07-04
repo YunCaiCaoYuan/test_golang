@@ -15,7 +15,7 @@ func main() {
 	// Set the healthcheck interval to 10s. When requests fail,
 	// retry 5 times. Print error messages to os.Stderr and informational
 	// messages to os.Stdout.
-	_, err := elastic.NewClient(
+	client, err := elastic.NewClient(
 		elastic.SetURL("http://127.0.0.1:9200"),
 		elastic.SetSniff(false),
 		elastic.SetHealthcheckInterval(10*time.Second),
@@ -27,6 +27,7 @@ func main() {
 			"X-Caller-Id": []string{"..."},
 		}),
 	)
+	fmt.Println("client start", client)
 	if err != nil {
 		fmt.Println(err)
 	}
