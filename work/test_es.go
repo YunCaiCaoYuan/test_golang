@@ -55,6 +55,8 @@ func main() {
 		return
 	}
 	if exists {
+		fmt.Println("index exists")
+	} else {
 		// Create a new index.
 		createIndex, err := client.CreateIndex(indexName).Do(ctx)
 		if err != nil {
