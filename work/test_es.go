@@ -85,8 +85,8 @@ func main() {
 	searchResult, err := client.Search().
 		Index(indexName). // search in index t.index
 		Query(elastic.NewTermQuery("user", "olivere")). // specify the query
-		Sort("user", true). // sort by "user" field, ascending
-		From(0).Size(10). // take documents 0-9
+		//Sort("user", true).                             // sort by "user" field, ascending
+		//From(0).Size(10).                               // take documents 0-9
 		Pretty(true). // pretty print request and response JSON
 		Do(ctx) // execute
 	if err != nil {
@@ -109,6 +109,7 @@ func main() {
 				fmt.Printf("Deserialize failed: %v\n", err)
 				continue
 			}
+			fmt.Printf("tweet: %v\n", tweet)
 		}
 	} else {
 		// No hits
