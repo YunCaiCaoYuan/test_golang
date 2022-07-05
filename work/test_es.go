@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/olivere/elastic"
+	"github.com/olivere/elastic/v7"
 	"log"
 	"net/http"
 	"os"
@@ -83,18 +83,18 @@ func main() {
 
 	// Search with a term query
 	searchResult, err := client.Search().
-		Index(indexName).                               // search in index t.index
+		Index(indexName). // search in index t.index
 		Query(elastic.NewTermQuery("user", "olivere")). // specify the query
-		Sort("user", true).                             // sort by "user" field, ascending
-		From(0).Size(10).                               // take documents 0-9
-		Pretty(true).                                   // pretty print request and response JSON
-		Do(ctx)                                         // execute
+		Sort("user", true). // sort by "user" field, ascending
+		From(0).Size(10). // take documents 0-9
+		Pretty(true). // pretty print request and response JSON
+		Do(ctx) // execute
 	if err != nil {
 		fmt.Printf("Search failed: %v\n", err)
 		return
 	}
 	// Number of hits
-	if searchResult.Hits.TotalHits > 0 {
+	if searchResult.Hits.TotalHits.Value > 0 {
 		fmt.Printf("Found a total of %d tweets\n", searchResult.Hits.TotalHits)
 
 		// Iterate through results
@@ -103,7 +103,7 @@ func main() {
 
 			// Deserialize hit.Source into a Tweet (could also be just a map[string]interface{}).
 			var tweet Tweet
-			err := json.Unmarshal(*hit.Source, &tweet)
+			err := json.Unmarshal(hit.Source, &tweet)
 			if err != nil {
 				// Deserialization failed
 				fmt.Printf("Deserialize failed: %v\n", err)
