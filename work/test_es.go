@@ -83,12 +83,12 @@ func main() {
 
 	// Search with a term query
 	searchResult, err := client.Search().
-		Index(indexName). // search in index t.index
+		Index(indexName).                               // search in index t.index
 		Query(elastic.NewTermQuery("user", "olivere")). // specify the query
-		Sort("user", true). // sort by "user" field, ascending
-		From(0).Size(10). // take documents 0-9
-		Pretty(true). // pretty print request and response JSON
-		Do(ctx) // execute
+		Sort("user", true).                             // sort by "user" field, ascending
+		From(0).Size(10).                               // take documents 0-9
+		Pretty(true).                                   // pretty print request and response JSON
+		Do(ctx)                                         // execute
 	if err != nil {
 		fmt.Printf("Search failed: %v\n", err)
 		return
