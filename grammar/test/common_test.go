@@ -31,3 +31,16 @@ func Test_blank(t *testing.T) {
 	fmt.Println("你\u3000\u30001")
 	fmt.Println("\u3000\u3000\u30001")
 }
+
+func Test_float(t *testing.T) {
+	var a int32
+	a = 1
+	var b int32
+	b = 2
+	var c float32
+	c = float32(a / b) // 0 错误
+	fmt.Println(c)
+
+	c = float32(a) / float32(b) // 0.5 正确
+	fmt.Println(c)
+}
