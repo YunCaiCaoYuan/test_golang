@@ -4,6 +4,7 @@ go 1.17
 
 require (
 	bou.ke/monkey v1.0.2
+	github.com/Rican7/retry v0.3.1
 	github.com/YunCaiCaoYuan/go-python3 v0.0.0-20210311092900-6e5efe112bb7
 	github.com/agiledragon/gomonkey/v2 v2.4.0
 	github.com/aliyun/aliyun-oss-go-sdk v2.2.0+incompatible
