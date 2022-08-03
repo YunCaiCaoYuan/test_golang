@@ -9,6 +9,7 @@ require (
 	github.com/agiledragon/gomonkey/v2 v2.4.0
 	github.com/aliyun/aliyun-oss-go-sdk v2.2.0+incompatible
 	github.com/baiyubin/aliyun-sts-go-sdk v0.0.0-20180326062324-cfa1a18b161f // indirect
+	github.com/boltdb/bolt v1.3.1
 	github.com/coreos/etcd v3.3.10+incompatible
 	github.com/facebookgo/ensure v0.0.0-20200202191622-63f1cf65ac4c // indirect
 	github.com/facebookgo/errgroup v0.0.0-20160209021148-779c8d7ef069
