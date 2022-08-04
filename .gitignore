@@ -17,3 +17,5 @@ package-lock.json
 *.interp
 *.tokens
 *.java
+*.db
+*.iml

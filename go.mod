@@ -26,6 +26,8 @@ require (
 	github.com/marusama/cyclicbarrier v1.1.0
 	github.com/matcornic/hermes/v2 v2.1.0
 	github.com/mdlayher/schedgroup v0.0.0-20200506182200-45678742bdc7
+	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
+	github.com/modern-go/reflect2 v1.0.1 // indirect
 	github.com/olivere/elastic/v7 v7.0.32
 	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/gomega v1.18.0
