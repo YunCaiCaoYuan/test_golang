@@ -2,6 +2,8 @@ package test
 
 import (
 	"fmt"
+	"math"
+	"strconv"
 	"testing"
 )
 
@@ -43,4 +45,31 @@ func Test_float(t *testing.T) {
 
 	c = float32(a) / float32(b) // 0.5 正确
 	fmt.Println(c)
+}
+
+func Test_float2(t *testing.T) {
+	var a int32
+	a = 11
+	var b int32
+	b = 2
+	var c float32
+	c = float32(a / b)
+	fmt.Println(c)
+
+	c = float32(a) / float32(b)
+	fmt.Println(c)
+
+	var d float64
+	d = math.Floor(float64(a) / float64(b))
+	fmt.Println(d)        // 5
+	fmt.Println(int64(d)) // 5
+}
+
+func Test_TicketRatio(t *testing.T) {
+	var TicketRatio int = 5
+	d := strconv.FormatFloat(float64(TicketRatio/10), 'f', 2, 64)
+	fmt.Println(d) // 0.00
+
+	e := strconv.FormatFloat(float64(TicketRatio)/10, 'f', 2, 64) // 先把整型转成浮点数
+	fmt.Println(e)                                                // 0.50
 }
