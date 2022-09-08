@@ -9,7 +9,11 @@ import (
 // [] {} ()
 // 栈
 
-var Stack = make([]byte, 0)
+var Stack []byte
+
+func New() {
+	Stack = make([]byte, 0)
+}
 
 func PushStack(c byte) {
 	Stack = append(Stack, c)
@@ -22,7 +26,7 @@ func PopStack() {
 		Stack = make([]byte, 0)
 		return
 	}
-	Stack = Stack[:len(Stack)-2]
+	Stack = Stack[:len(Stack)-1]
 }
 func TopStack() byte {
 	return Stack[len(Stack)-1]
@@ -49,9 +53,17 @@ func ValidBracket(str []byte) bool {
 }
 
 func Test_ValidBracket(t *testing.T) {
-	str := []byte{'{', '}'}
-	fmt.Println(str, " isValid: ", ValidBracket(str))
+	New()
+	str := []byte{'}', '{'}
+	fmt.Println(str, " isValid: ", ValidBracket(str), Stack)
 
-	str = []byte{'}', '{'}
-	fmt.Println(str, " isValid: ", ValidBracket(str))
+	New()
+	str = []byte{'{', '}', '{'}
+	fmt.Println(str, " isValid: ", ValidBracket(str), Stack)
+
+	New()
+	fmt.Println("Stack start", Stack)
+	str = []byte{'{', '}'}
+	fmt.Println(str, " isValid: ", ValidBracket(str), Stack)
+
 }
