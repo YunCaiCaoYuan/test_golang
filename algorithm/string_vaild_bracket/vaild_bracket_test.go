@@ -67,3 +67,6 @@ func Test_ValidBracket(t *testing.T) {
 	fmt.Println(str, " isValid: ", ValidBracket(str), Stack)
 
 }
+
+// time O(n)
+// space O(n)
