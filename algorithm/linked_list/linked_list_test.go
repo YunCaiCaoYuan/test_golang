@@ -146,4 +146,4 @@ func Test_swapList5(t *testing.T) {
 	printList(swapList(nod))
 }
 
-// eg: go test -v linked_list_test.go -run=swapList
+// eg: go test -v  -run=swapList
