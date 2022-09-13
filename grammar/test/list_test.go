@@ -55,3 +55,11 @@ type ElementWrapImpl struct {
 func (this *ElementWrapImpl) accept(v MyVisitor) {
 	v.Visit(this.L)
 }
+
+func Test_PopList(t *testing.T) {
+	list := make([]int64, 0)
+	list = append(list, 1, 2, 3, 4)
+	fmt.Println("list1", list)
+	list = list[1:len(list)] // 切片
+	fmt.Println("list2", list)
+}
