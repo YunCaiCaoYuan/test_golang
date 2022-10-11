@@ -73,3 +73,10 @@ func Test_TicketRatio(t *testing.T) {
 	e := strconv.FormatFloat(float64(TicketRatio)/10, 'f', 2, 64) // 先把整型转成浮点数
 	fmt.Println(e)                                                // 0.50
 }
+
+func Test_Rate(t *testing.T) {
+	GoldPond := 123
+	totalPond := 9999
+	Rate := strconv.FormatFloat(float64(GoldPond*100)/float64(totalPond), 'f', 3, 64) + "%"
+	fmt.Println(Rate)
+}
