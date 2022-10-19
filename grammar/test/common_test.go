@@ -80,3 +80,22 @@ func Test_Rate(t *testing.T) {
 	Rate := strconv.FormatFloat(float64(GoldPond*100)/float64(totalPond), 'f', 3, 64) + "%"
 	fmt.Println(Rate)
 }
+
+// 在 continue 语句后添加标签时，表示开始标签对应的循环
+func Test_continue(t *testing.T) {
+
+OuterLoop:
+	for i := 0; i < 2; i++ {
+		for j := 0; j < 5; j++ {
+			switch j {
+			case 2:
+				fmt.Println(i, j)
+				continue OuterLoop
+			}
+		}
+	}
+
+}
+
+//0 2
+//1 2
