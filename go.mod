@@ -44,10 +44,11 @@ require (
 	github.com/xxtea/xxtea-go v0.0.0-20170828040851-35c4b17eecf6
 	github.com/zheng-ji/goSnowFlake v0.0.0-20180906112711-fc763800eec9
 	go.uber.org/zap v1.20.0
-	golang.org/x/crypto v0.0.0-20220112180741-5e0467b6c7ce
-	golang.org/x/net v0.0.0-20220127200216-cd36cc0744dd
-	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
-	golang.org/x/text v0.3.7
+	golang.org/x/crypto v0.1.0
+	golang.org/x/net v0.1.0
+	golang.org/x/sync v0.0.0-20220722155255-886fb9371eb4
+	golang.org/x/text v0.4.0
+	golang.org/x/tools v0.2.0 // indirect
 	google.golang.org/grpc v1.39.0
 	gopkg.in/alexcesaro/quotedprintable.v3 v3.0.0-20150716171945-2caba252f4dc // indirect
 	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df // indirect
