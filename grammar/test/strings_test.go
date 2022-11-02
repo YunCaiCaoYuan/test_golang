@@ -2,6 +2,7 @@ package test
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 	"testing"
 )
@@ -56,3 +57,13 @@ func Test_12(t *testing.T) {
 		fmt.Println("item:", item)
 	}
 }
+
+func Test_atoi(t *testing.T) {
+	s := "你好"
+	sr, er := strconv.Atoi(s)
+	fmt.Println(er)
+	fmt.Println(sr)
+}
+
+//strconv.Atoi: parsing "你好": invalid syntax
+//0
