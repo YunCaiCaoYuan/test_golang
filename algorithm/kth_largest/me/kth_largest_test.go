@@ -1,4 +1,4 @@
-package kth_largest
+package me
 
 import (
 	"container/heap"
@@ -30,22 +30,19 @@ func Constructor(k int, nums []int) KthLargest {
 		elem: make([]int, 0),
 		k:    k,
 	}
-	heap.Init(&obj)
 	for _, item := range nums {
-		obj.Push(item)
-		if obj.Len() >= k {
-			obj.Pop()
-		}
+		obj.Add(item)
 	}
+	heap.Init(&obj)
 	return obj
 }
 
 func (this *KthLargest) Add(val int) int {
-	this.Push(val)
-	if this.Len() >= this.k {
-		return this.Pop().(int)
+	heap.Push(this, val)
+	if this.Len() > this.k {
+		heap.Pop(this)
 	}
-	return -1
+	return this.elem[0]
 }
 
 /**
@@ -61,3 +58,14 @@ func Test_run(t *testing.T) {
 	param_1 := obj.Add(10)
 	fmt.Println(param_1)
 }
+
+func Test_2(t *testing.T) {
+	kl := Constructor(3, []int{6, 1, 91})
+	fmt.Println("kl.IntSlice[0]", kl.elem[0])
+	fmt.Println("kl.Add(2)", kl.Add(2))
+	fmt.Println("kl.Add(88)", kl.Add(88))
+}
+
+//kl.IntSlice[0] 1
+//kl.Add(2) 2
+//kl.Add(88) 6
