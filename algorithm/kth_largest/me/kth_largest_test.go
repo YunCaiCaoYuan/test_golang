@@ -33,7 +33,6 @@ func Constructor(k int, nums []int) KthLargest {
 	for _, item := range nums {
 		obj.Add(item)
 	}
-	heap.Init(&obj)
 	return obj
 }
 
