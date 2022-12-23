@@ -14,6 +14,7 @@ type param struct {
 
 func handleCommitAnswer(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("path:", r.URL.Path, "method:", r.Method, "form:", r.Form, "PostForm:", r.PostForm, "header:", r.Header)
+	fmt.Println("header:", r.Header)
 	if r.Method == "GET" {
 		w.Write([]byte("hello1"))
 		return
@@ -38,11 +39,33 @@ func handleCommitAnswer(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+type question struct {
+	Id    int64    `json:"id"`
+	Title string   `json:"title"`
+	Opts  []string `json:"opts"`
+}
+
+func handlePullQuestion(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("path2:", r.URL.Path, "method:", r.Method, "form:", r.Form, "PostForm:", r.PostForm, "header:", r.Header)
+	fmt.Println("header:", r.Header)
+	if r.Method == "GET" {
+		ques := question{
+			Id:    123,
+			Title: "下面哪个是中国的四大发明???",
+			Opts:  []string{"火药1", "中药2", "火锅3", "指北针4"},
+		}
+		bin, _ := json.Marshal(ques)
+		w.Write(bin)
+		return
+	}
+}
+
 func main() {
 	fmt.Println("answer start...")
 
 	handler := http.NewServeMux()
 	handler.HandleFunc("/commit_answer", handleCommitAnswer)
+	handler.HandleFunc("/pull_question", handlePullQuestion)
 
 	server := &http.Server{Addr: ":8080", Handler: handler}
 	err := server.ListenAndServe()
