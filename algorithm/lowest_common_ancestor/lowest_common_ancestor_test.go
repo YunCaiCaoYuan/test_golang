@@ -48,10 +48,10 @@ func Test_lowestCommonAncestor(t *testing.T) {
 
 // 二叉搜索树的最近公共祖先
 func lowestCommonAncestorV2(root, p, q *TreeNode) *TreeNode {
-	if p.Val < root.Val && root.Val > q.Val {
+	if p.Val < root.Val && q.Val < root.Val {
 		return lowestCommonAncestorV2(root.Left, p, q)
 	}
-	if p.Val > root.Val && root.Val < q.Val {
+	if p.Val > root.Val && q.Val > root.Val {
 		return lowestCommonAncestorV2(root.Right, p, q)
 	}
 	return root
