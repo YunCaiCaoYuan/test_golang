@@ -45,3 +45,36 @@ func Test_lowestCommonAncestor(t *testing.T) {
 	ret := lowestCommonAncestor(root, left, right)
 	fmt.Println(ret)
 }
+
+// 二叉搜索树的最近公共祖先
+func lowestCommonAncestorV2(root, p, q *TreeNode) *TreeNode {
+	if p.Val < root.Val && root.Val > q.Val {
+		return lowestCommonAncestorV2(root.Left, p, q)
+	}
+	if p.Val > root.Val && root.Val < q.Val {
+		return lowestCommonAncestorV2(root.Right, p, q)
+	}
+	return root
+}
+
+func Test_lowestCommonAncestorV2(t *testing.T) {
+	left := &TreeNode{Val: 1}
+	right := &TreeNode{Val: 3}
+	root := &TreeNode{Val: 2, Left: left, Right: right}
+	ret := lowestCommonAncestorV2(root, left, right)
+	fmt.Println(ret)
+}
+
+//    6
+//  2   8
+// 0 4 7 9
+//  3 5
+//输入: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8
+//输出: 6
+func Test_lowestCommonAncestorV2_B(t *testing.T) {
+	left := &TreeNode{Val: 2, Left: &TreeNode{Val: 0}, Right: &TreeNode{Val: 4, Left: &TreeNode{Val: 3}, Right: &TreeNode{Val: 5}}}
+	right := &TreeNode{Val: 8, Left: &TreeNode{Val: 7}, Right: &TreeNode{Val: 9}}
+	root := &TreeNode{Val: 6, Left: left, Right: right}
+	ret := lowestCommonAncestorV2(root, left, right)
+	fmt.Println(ret)
+}
