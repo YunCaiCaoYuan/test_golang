@@ -16,8 +16,8 @@ func Test_createBigFile(t *testing.T) {
 	}
 
 	intMap := make(map[int64]struct{})
-	for i := 1; i <= 100; i++ {
-		intMap[rand.Int63n(math.MaxInt16)] = struct{}{}
+	for i := 1; i <= 10*1000*1000; i++ {
+		intMap[rand.Int63n(math.MaxInt32)] = struct{}{}
 	}
 	fmt.Println(len(intMap))
 
