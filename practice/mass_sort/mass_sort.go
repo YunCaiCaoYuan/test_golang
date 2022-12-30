@@ -89,11 +89,12 @@ func SortAndMerge(fileNum int) {
 			fmt.Println("err", err)
 			return
 		}
+		fileHandlerL = append(fileHandlerL, f)
 		buf := bufio.NewReader(f)
 		fileReaderL = append(fileReaderL, buf)
 	}
 
-	fs, err := os.Create(Path + "/text_sorted")
+	fs, err := os.Create(Path + "text_sorted")
 	if err != nil {
 		fmt.Println("err", err)
 		return
@@ -133,7 +134,8 @@ func SortAndMerge(fileNum int) {
 	wBuf.Flush()
 
 	// 关闭文件
-	for _, fileH := range fileHandlerL {
+	for idx, fileH := range fileHandlerL {
+		fmt.Println("close file index:", idx)
 		err := fileH.Close()
 		if err != nil {
 			fmt.Println(err)
