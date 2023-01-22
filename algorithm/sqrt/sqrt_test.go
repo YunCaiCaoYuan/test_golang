@@ -21,7 +21,7 @@ func sqrt(x int) int {
 			return m
 		} else if m > x/m {
 			fmt.Println("2——", "m:", m, "l:", l, "r:", r)
-			r = m - 1
+			r = m - 1 // 因为返回int，所以这里可以减1
 		} else {
 			fmt.Println("3——", "m:", m, "l:", l, "r:", r)
 			l = m + 1
