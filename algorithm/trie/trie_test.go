@@ -5,6 +5,8 @@ import (
 	"testing"
 )
 
+// 字母是边
+
 type Trie struct {
 	children []*Trie
 	isEnd    bool
