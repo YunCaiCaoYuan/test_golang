@@ -5,6 +5,8 @@ import (
 	"testing"
 )
 
+// 时间复杂度：O( n)
+//            2
 func fib(n int) int {
 	if n <= 0 {
 		return 0
@@ -41,7 +43,8 @@ func Test_fibV2(t *testing.T) {
 	fmt.Println(ret)
 }
 
-// 递推
+// 递推（动态规划）
+// 时间复杂度：O(n)
 func fibV3(n int) int {
 	F := make([]int, n+1)
 	F[0] = 0
