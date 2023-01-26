@@ -5,6 +5,8 @@ import (
 	"testing"
 )
 
+// 时间复杂度：O(  n)
+//		       2
 func countPaths(grid [][]bool, row, col int) int {
 	if !validSquare(grid, row, col) {
 		return 0
