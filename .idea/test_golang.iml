@@ -5,7 +5,15 @@
       <configuration sdkName="Python 3.8 (test_golang)" />
     </facet>
   </component>
-  <component name="Go" enabled="true" />
+  <component name="Go" enabled="true">
+    <buildTags>
+      <option name="customFlags">
+        <array>
+          <option value="goexperiment.arenas" />
+        </array>
+      </option>
+    </buildTags>
+  </component>
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
