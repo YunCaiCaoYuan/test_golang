@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/YunCaiCaoYuan/test_golang/call_python/test"
+	//"github.com/YunCaiCaoYuan/test_golang/call_python/test"
+	"test_golang/call_python/test"
 )
 
-func main()  {
+func main() {
 	test.Test()
 }
