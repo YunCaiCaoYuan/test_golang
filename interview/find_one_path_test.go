@@ -28,6 +28,11 @@ type path struct {
 // 类似A*做法，有open节点集合（可以走）和visited节点结合（已经走过的）
 // 按广度找，一层一层找
 // 注意：要先想清楚算法，再去动手写
+// 把open当作队列，所以是广度优先
+// 把open当做栈，所以是深度优先
+// 狄克斯特拉和a*的不同在于，评估函数不同
+
+// BFS实现
 func find_path(graph [][]int, src, dst *path) []*path {
 	open := make([]*path, 0)
 	open = append(open, src)
