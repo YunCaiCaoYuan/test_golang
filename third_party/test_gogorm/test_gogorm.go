@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
+	"time"
+
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
-	"time"
 )
 
 type FacadeType int32
@@ -42,18 +43,41 @@ func (*Player) TableName() string {
 	return "player"
 }
 
+type Test struct {
+	ID   int32  `gorm:"column:id"`
+	Name string `gorm:"column:name"`
+}
+
+func (*Test) TableName() string {
+	return "test"
+}
+
 func main() {
-	dbDSN := "root:123456@tcp(127.0.0.1:3306)/test?parseTime=True"
+	dbDSN := "root:sunbin@tcp(127.0.0.1:3306)/mango_logic?parseTime=True"
 	db, err := gorm.Open(mysql.Open(dbDSN), &gorm.Config{})
 	if err != nil {
 		fmt.Println("err=", err)
 	}
 
-	res := db.Model(&Player{}).Where(" `Id`=? and `Sex`=0 ", 1001082).Updates(map[string]interface{}{
-		"Sex":      1,
-		"CreateAt": time.Now(),
-	})
-	if res.Error != nil {
-		fmt.Println("res.Error=", res.Error)
+	list := make([]Test, 0)
+	err = db.Raw("select * from test").Scan(&list).Error
+	if err != nil {
+		fmt.Println("err=", err)
 	}
+	fmt.Println("list=", list)
+
+	/*
+		dbDSN := "root:sunbin@tcp(127.0.0.1:3306)/test?parseTime=True"
+		db, err := gorm.Open(mysql.Open(dbDSN), &gorm.Config{})
+		if err != nil {
+			fmt.Println("err=", err)
+		}
+		res := db.Model(&Player{}).Where(" `Id`=? and `Sex`=0 ", 1001082).Updates(map[string]interface{}{
+			"Sex":      1,
+			"CreateAt": time.Now(),
+		})
+		if res.Error != nil {
+			fmt.Println("res.Error=", res.Error)
+		}
+	*/
 }
