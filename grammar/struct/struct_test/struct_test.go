@@ -3,6 +3,7 @@ package struct_test
 import (
 	"fmt"
 	"testing"
+	"unsafe"
 )
 
 type a struct {
@@ -34,4 +35,21 @@ func newObj() *b {
 func Test_Obj(t *testing.T) {
 	obj := newObj()
 	obj.say()
+}
+
+type C struct {
+	c1 int
+	c2 int
+	c3 C3
+}
+
+type C3 struct {
+	c31 int
+	c32 int
+}
+
+func Test_struct(t *testing.T) {
+	c := new(C)
+	fmt.Println("sizeof struct c =", unsafe.Sizeof(c)) // 8
+	fmt.Println(c.c3.c31)                              // 如果c3是指针，则无法访问c31
 }
