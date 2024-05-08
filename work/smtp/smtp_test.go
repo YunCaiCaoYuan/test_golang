@@ -9,9 +9,11 @@ import (
 	"net/smtp"
 )
 
+// 163邮箱不验证FROM,QQ不行
+
 func ExampleSendMailQQMail() {
 	// Set up authentication information.
-	auth := smtp.PlainAuth("", "769460962@qq.com", "mbaxtfukgubzbbfc", "smtp.qq.com")
+	auth := smtp.PlainAuth("", "769460962@qq.com", "kaaxgjefdxanbfhc", "smtp.qq.com")
 
 	// Connect to the server, authenticate, set the sender and recipient,
 	// and send the email all in one step.
@@ -36,7 +38,7 @@ func ExampleSendMail163Mail() {
 	// and send the email all in one step.
 	to := []string{"sb769460962@163.com"}
 	msg := []byte("To: sb769460962@163.com\r\n" + // 收件人信息
-		"From: sb769460962@163.com\r\n" + // 发件人信息
+		"From: 769460962@qq.com\r\n" + // 发件人信息
 		"Subject: discount Gophers!\r\n" + // 主题
 		"\r\n" +
 		"This is the email body.\r\n") // 内容
