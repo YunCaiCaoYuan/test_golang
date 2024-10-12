@@ -4,6 +4,7 @@ package slice
 
 import (
 	"fmt"
+	"reflect"
 	"sync"
 	"testing"
 )
@@ -36,4 +37,50 @@ func main() {
 
 func Test_concurrentAppendSliceNotForceIndex(t *testing.T) {
 	concurrentAppendSliceNotForceIndex()
+}
+
+func Test_SlicePointerUse(t *testing.T) {
+	list := make([]int64, 0)
+	fmt.Println("list1:", list)
+	slicePointerUse(&list)
+	fmt.Println("list2:", list)
+}
+func slicePointerUse(list *[]int64) {
+	// 在函数内部，通过解引用指针来访问和操作切片
+	int64s := *list
+	int64s = append(int64s, 1)
+	fmt.Println("int64s:", int64s)
+	fmt.Println("lista:", *list)
+}
+
+func Test_SlicePointerUse2(t *testing.T) {
+	list := make([]int64, 3)
+	fmt.Println("list1:", list)
+	slicePointerUse2(&list)
+	fmt.Println("list2:", list)
+}
+func slicePointerUse2(list *[]int64) {
+	int64s := *list
+	int64s[0] = 1
+	//fmt.Println("int64s:", int64s)
+	//fmt.Println("lista:", *list)
+}
+
+//list1: [0 0 0]
+//list2: [1 0 0]
+
+// gorm scan是如何修改切片的？
+// 反射
+func Test_SlicePointerUse3(t *testing.T) {
+	list := make([]int64, 0)
+	fmt.Println("list1:", list)
+	slicePointerUse3(&list)
+	fmt.Println("list2:", list)
+}
+func slicePointerUse3(list *[]int64) {
+	//fmt.Println("TypeOf list:", reflect.TypeOf(list))
+	value := reflect.ValueOf(list)
+	v := value.Elem()
+	fmt.Println("v:", v)
+	v.Set(reflect.Append(v, reflect.ValueOf(int64(4))))
 }
